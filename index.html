@@ -38,6 +38,7 @@ h2{font-size:32px;letter-spacing:-.03em;margin:0 0 8px}
 .card h3{margin:0 0 8px;font-size:19px}.card p{margin:0;color:var(--muted);font-size:15px}
 .card .meta{margin-top:16px;font-size:12px;color:#74808c}
 .card a.more{display:inline-block;margin-top:16px;color:var(--mint);font-weight:700;font-size:14px}
+.grid.g2{grid-template-columns:repeat(2,1fr)}
 .steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
 .step::before{counter-increment:s;content:"0" counter(s);color:var(--mint);font-weight:800;font-size:12px}
@@ -48,7 +49,7 @@ h2{font-size:32px;letter-spacing:-.03em;margin:0 0 8px}
 .cta h2{font-size:36px}.cta .btns{justify-content:center}
 footer{padding:32px 0 50px;color:#74808c;font-size:13px;text-align:center}
 [data-l]{display:none}html[lang=ru] [data-l=ru],html[lang=en] [data-l=en]{display:revert}
-@media(max-width:860px){.grid,.stack{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.nav a.link{display:none}}
+@media(max-width:860px){.grid,.grid.g2,.stack{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.nav a.link{display:none}}
 @media(max-width:520px){.steps{grid-template-columns:1fr}.hero{padding-top:70px}}
 </style>
 </head>
@@ -91,9 +92,10 @@ footer{padding:32px 0 50px;color:#74808c;font-size:13px;text-align:center}
 <section id="projects"><div class="wrap">
   <h2><span data-l="ru">Проекты</span><span data-l="en">Projects</span></h2>
   <p class="sub"><span data-l="ru">Открытый код: можно посмотреть, как это написано и как проверяется.</span><span data-l="en">Open source: see how it is written and verified.</span></p>
-  <div class="grid">
+  <div class="grid g2">
     <div class="card"><h3>PipelineMint</h3><p><span data-l="ru">Дашборд воронки продаж: скоринг лидов, канбан по стадиям, REST API, OpenAPI-контракт, черновик SQL-схемы, CI.</span><span data-l="en">Sales-pipeline dashboard: lead scoring, kanban by stage, REST API, OpenAPI contract, draft SQL schema, CI.</span></p><div class="meta">Next.js · TypeScript</div><a class="more" href="https://github.com/requiemneon-ship-it/pipeline-mint" target="_blank" rel="noopener">GitHub →</a></div>
     <div class="card"><h3>Telegram Lead Bot</h3><p><span data-l="ru">Бот пошагово собирает заявки, проверяет ответы, хранит в SQLite и выгружает в CSV. Русский и английский.</span><span data-l="en">Bot collects requests step by step, validates answers, stores them in SQLite and exports CSV. Russian and English.</span></p><div class="meta">Python · SQLite</div><a class="more" href="https://github.com/requiemneon-ship-it/telegram-lead-bot" target="_blank" rel="noopener">GitHub →</a></div>
+    <div class="card"><h3>Orders API</h3><p><span data-l="ru">REST API для учёта заказов: валидация, фильтры и пагинация, статусы, защита записи ключом, 16 тестов.</span><span data-l="en">REST API for order management: validation, filters and pagination, status workflow, key-protected writes, 16 tests.</span></p><div class="meta">Python · FastAPI · SQLite</div><a class="more" href="https://github.com/requiemneon-ship-it/orders-api" target="_blank" rel="noopener">GitHub →</a></div>
     <div class="card"><h3><span data-l="ru">Витрина магазина</span><span data-l="en">Store front demo</span></h3><p><span data-l="ru">Одностраничная витрина интернет-магазина с лёгким Node-сервером.</span><span data-l="en">Single-page online store front with a lightweight Node server.</span></p><div class="meta">HTML · CSS · JS · Node.js</div><a class="more" href="https://github.com/requiemneon-ship-it/requiemneon-ship-it/tree/main/fishing-demo" target="_blank" rel="noopener">GitHub →</a></div>
   </div>
 </div></section>
