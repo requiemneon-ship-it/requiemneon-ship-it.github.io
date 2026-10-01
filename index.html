@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KIR NEIR — Web developer · Telegram bots</title>
+<meta name="description" content="Сайты, Telegram-боты, дашборды и автоматизация. Websites, Telegram bots, dashboards and automation.">
+<meta property="og:title" content="KIR NEIR — Web developer · Telegram bots">
+<meta property="og:description" content="Сайты, Telegram-боты, дашборды и автоматизация.">
+<style>
+:root{--bg:#0b0d10;--panel:#11151a;--panel2:#161b22;--text:#f7f8fa;--muted:#8d98a6;--line:#242b34;--mint:#62f6b5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:auto;padding:0 24px}
+header{position:sticky;top:0;z-index:5;background:rgba(11,13,16,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;gap:22px}
+.brand{font-weight:850;letter-spacing:-.03em;font-size:19px}.brand span{color:var(--mint)}
+.nav a.link{color:#aeb7c1;font-size:14px}.nav a.link:hover{color:#fff}
+.spacer{margin-left:auto}
+.lang{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.lang button{background:transparent;color:#aeb7c1;border:0;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}
+.lang button.on{background:var(--mint);color:#07110d;font-weight:800}
+.hero{padding:110px 0 70px;background:radial-gradient(circle at 75% 0%,rgba(98,246,181,.13),transparent 40%)}
+.eyebrow{color:var(--mint);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin:0 0 14px}
+h1{font-size:clamp(40px,7vw,78px);line-height:.98;letter-spacing:-.05em;margin:0;max-width:880px}
+.lead{max-width:640px;color:#aeb7c1;font-size:19px;margin:26px 0 34px}
+.btn{display:inline-block;border-radius:12px;padding:13px 20px;font-weight:750;border:1px solid var(--line);background:#141920}
+.btn.primary{background:var(--mint);color:#07110d;border-color:var(--mint)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:42px}
+.tag{font-size:12px;color:#9aa5b1;border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+section{padding:64px 0}
+h2{font-size:32px;letter-spacing:-.03em;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 30px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:linear-gradient(180deg,#12161b,#0e1115);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{margin:0 0 8px;font-size:19px}.card p{margin:0;color:var(--muted);font-size:15px}
+.card .meta{margin-top:16px;font-size:12px;color:#74808c}
+.card a.more{display:inline-block;margin-top:16px;color:var(--mint);font-weight:700;font-size:14px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.step::before{counter-increment:s;content:"0" counter(s);color:var(--mint);font-weight:800;font-size:12px}
+.step h3{margin:10px 0 6px;font-size:16px}.step p{margin:0;color:var(--muted);font-size:14px}
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stack .card h3{font-size:14px;color:var(--mint);text-transform:uppercase;letter-spacing:.1em}
+.cta{text-align:center;background:radial-gradient(circle at 50% 0%,rgba(98,246,181,.12),transparent 60%),var(--panel);border:1px solid var(--line);border-radius:24px;padding:56px 24px}
+.cta h2{font-size:36px}.cta .btns{justify-content:center}
+footer{padding:32px 0 50px;color:#74808c;font-size:13px;text-align:center}
+[data-l]{display:none}html[lang=ru] [data-l=ru],html[lang=en] [data-l=en]{display:revert}
+@media(max-width:860px){.grid,.stack{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.nav a.link{display:none}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}.hero{padding-top:70px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#top">KIR<span>NEIR</span></a>
+  <a class="link" href="#services"><span data-l="ru">Услуги</span><span data-l="en">Services</span></a>
+  <a class="link" href="#projects"><span data-l="ru">Проекты</span><span data-l="en">Projects</span></a>
+  <a class="link" href="#process"><span data-l="ru">Как работаю</span><span data-l="en">Process</span></a>
+  <a class="link" href="#stack"><span data-l="ru">Стек</span><span data-l="en">Stack</span></a>
+  <div class="spacer"></div>
+  <div class="lang" role="group" aria-label="Language"><button data-set="ru" class="on">RU</button><button data-set="en">EN</button></div>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <p class="eyebrow"><span data-l="ru">Принимаю заказы</span><span data-l="en">Open for orders</span></p>
+  <h1><span data-l="ru">Сайты, Telegram-боты и бизнес-инструменты, которые работают.</span><span data-l="en">Websites, Telegram bots and business tools that work.</span></h1>
+  <p class="lead"><span data-l="ru">Делаю лендинги, дашборды, ботов для приёма заявок и автоматизацию рутины. Код с тестами и понятной документацией, чтобы результат можно было проверить и развивать дальше.</span><span data-l="en">I build landing pages, dashboards, request-intake bots and routine automation. Code comes with tests and clear documentation, so the result is easy to verify and extend.</span></p>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/requiemneon-ship-it/requiemneon-ship-it/issues/new" target="_blank" rel="noopener"><span data-l="ru">Обсудить проект</span><span data-l="en">Discuss a project</span></a>
+    <a class="btn" href="https://github.com/requiemneon-ship-it" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <div class="tags"><span class="tag">JavaScript / TypeScript</span><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Telegram Bot API</span><span class="tag">SQLite / PostgreSQL</span><span class="tag">RU · EN</span></div>
+</div></div>
+
+<section id="services"><div class="wrap">
+  <h2><span data-l="ru">Чем могу помочь</span><span data-l="en">What I can do</span></h2>
+  <p class="sub"><span data-l="ru">Небольшие и средние задачи от идеи до запуска.</span><span data-l="en">Small and mid-size tasks from idea to launch.</span></p>
+  <div class="grid">
+    <div class="card"><h3><span data-l="ru">Сайты и лендинги</span><span data-l="en">Websites & landing pages</span></h3><p><span data-l="ru">Адаптивная вёрстка, формы заявок, мультиязычность, быстрая загрузка.</span><span data-l="en">Responsive layouts, lead forms, multilingual pages, fast loading.</span></p></div>
+    <div class="card"><h3><span data-l="ru">Telegram-боты</span><span data-l="en">Telegram bots</span></h3><p><span data-l="ru">Приём заявок, уведомления, простая CRM, выгрузка в таблицы.</span><span data-l="en">Request intake, notifications, simple CRM, spreadsheet export.</span></p></div>
+    <div class="card"><h3><span data-l="ru">Дашборды и админки</span><span data-l="en">Dashboards & admin panels</span></h3><p><span data-l="ru">Воронки, отчёты, внутренние инструменты для команды.</span><span data-l="en">Pipelines, reports and internal tools for your team.</span></p></div>
+    <div class="card"><h3><span data-l="ru">Автоматизация</span><span data-l="en">Automation</span></h3><p><span data-l="ru">Скрипты и интеграции, которые убирают ручную рутину.</span><span data-l="en">Scripts and integrations that remove manual routine.</span></p></div>
+    <div class="card"><h3><span data-l="ru">Доработка кода</span><span data-l="en">Fixing & extending code</span></h3><p><span data-l="ru">Исправление ошибок, новые функции, наведение порядка в проекте.</span><span data-l="en">Bug fixes, new features, project cleanup.</span></p></div>
+    <div class="card"><h3><span data-l="ru">Тесты и CI</span><span data-l="en">Tests & CI</span></h3><p><span data-l="ru">Автотесты и проверки на GitHub Actions, чтобы изменения не ломали работу.</span><span data-l="en">Automated tests and GitHub Actions checks so changes don't break things.</span></p></div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2><span data-l="ru">Проекты</span><span data-l="en">Projects</span></h2>
+  <p class="sub"><span data-l="ru">Открытый код: можно посмотреть, как это написано и как проверяется.</span><span data-l="en">Open source: see how it is written and verified.</span></p>
+  <div class="grid">
+    <div class="card"><h3>PipelineMint</h3><p><span data-l="ru">Дашборд воронки продаж: скоринг лидов, канбан по стадиям, REST API, OpenAPI-контракт, черновик SQL-схемы, CI.</span><span data-l="en">Sales-pipeline dashboard: lead scoring, kanban by stage, REST API, OpenAPI contract, draft SQL schema, CI.</span></p><div class="meta">Next.js · TypeScript</div><a class="more" href="https://github.com/requiemneon-ship-it/pipeline-mint" target="_blank" rel="noopener">GitHub →</a></div>
+    <div class="card"><h3>Telegram Lead Bot</h3><p><span data-l="ru">Бот пошагово собирает заявки, проверяет ответы, хранит в SQLite и выгружает в CSV. Русский и английский.</span><span data-l="en">Bot collects requests step by step, validates answers, stores them in SQLite and exports CSV. Russian and English.</span></p><div class="meta">Python · SQLite</div><a class="more" href="https://github.com/requiemneon-ship-it/telegram-lead-bot" target="_blank" rel="noopener">GitHub →</a></div>
+    <div class="card"><h3><span data-l="ru">Витрина магазина</span><span data-l="en">Store front demo</span></h3><p><span data-l="ru">Одностраничная витрина интернет-магазина с лёгким Node-сервером.</span><span data-l="en">Single-page online store front with a lightweight Node server.</span></p><div class="meta">HTML · CSS · JS · Node.js</div><a class="more" href="https://github.com/requiemneon-ship-it/requiemneon-ship-it/tree/main/fishing-demo" target="_blank" rel="noopener">GitHub →</a></div>
+  </div>
+</div></section>
+
+<section id="process"><div class="wrap">
+  <h2><span data-l="ru">Как я работаю</span><span data-l="en">How I work</span></h2>
+  <p class="sub"><span data-l="ru">Прозрачно и по шагам.</span><span data-l="en">Transparent and step by step.</span></p>
+  <div class="steps">
+    <div class="step"><h3><span data-l="ru">Обсуждаем задачу</span><span data-l="en">We discuss the task</span></h3><p><span data-l="ru">Уточняю цель, сроки и бюджет. Без лишней бюрократии.</span><span data-l="en">I clarify goals, deadlines and budget. No red tape.</span></p></div>
+    <div class="step"><h3><span data-l="ru">Согласуем объём</span><span data-l="en">We agree on scope</span></h3><p><span data-l="ru">Фиксируем, что именно будет сделано и как проверим результат.</span><span data-l="en">We fix what will be built and how we'll verify it.</span></p></div>
+    <div class="step"><h3><span data-l="ru">Разрабатываю</span><span data-l="en">I build</span></h3><p><span data-l="ru">Показываю промежуточные результаты, код лежит в вашем репозитории.</span><span data-l="en">You see interim results; the code lives in your repository.</span></p></div>
+    <div class="step"><h3><span data-l="ru">Сдаю и поддерживаю</span><span data-l="en">Delivery & support</span></h3><p><span data-l="ru">Инструкция по запуску, тесты, помощь после сдачи.</span><span data-l="en">Setup guide, tests and help after handover.</span></p></div>
+  </div>
+</div></section>
+
+<section id="stack"><div class="wrap">
+  <h2><span data-l="ru">Технологии</span><span data-l="en">Technologies</span></h2>
+  <p class="sub"><span data-l="ru">Опыт в разработке — больше года. Ниже то, с чем работаю уверенно, и то, что изучаю.</span><span data-l="en">More than a year of development experience. Below is what I use confidently and what I'm learning.</span></p>
+  <div class="stack">
+    <div class="card"><h3><span data-l="ru">Основное</span><span data-l="en">Core</span></h3><p>JavaScript, TypeScript, HTML, CSS, Node.js, Next.js, React, Python</p></div>
+    <div class="card"><h3><span data-l="ru">Использую в проектах</span><span data-l="en">Used in projects</span></h3><p>SQLite, PostgreSQL, REST / OpenAPI, Telegram Bot API, GitHub Actions, Git</p></div>
+    <div class="card"><h3><span data-l="ru">Изучаю</span><span data-l="en">Learning</span></h3><p>C, Java, system design, E2E-тесты / E2E testing</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="cta">
+  <h2><span data-l="ru">Есть задача? Расскажите о ней.</span><span data-l="en">Got a task? Tell me about it.</span></h2>
+  <p class="sub"><span data-l="ru">Работаю с заказчиками из любых стран. Отвечу с оценкой сроков и стоимости.</span><span data-l="en">I work with clients worldwide. I'll reply with a timeline and cost estimate.</span></p>
+  <div class="btns"><a class="btn primary" href="https://github.com/requiemneon-ship-it/requiemneon-ship-it/issues/new" target="_blank" rel="noopener"><span data-l="ru">Написать на GitHub</span><span data-l="en">Write on GitHub</span></a></div>
+</div></div></section>
+</main>
+
+<footer><div class="wrap">© 2026 KIR NEIR · <a href="https://github.com/requiemneon-ship-it" target="_blank" rel="noopener">github.com/requiemneon-ship-it</a></div></footer>
+
+<script>
+(function () {
+  var html = document.documentElement, buttons = document.querySelectorAll('.lang button');
+  function set(lang) {
+    html.lang = lang;
+    buttons.forEach(function (b) { b.classList.toggle('on', b.dataset.set === lang); });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.set); }); });
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  set(saved || ((navigator.language || '').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'));
+})();
+</script>
+</body>
+</html>
