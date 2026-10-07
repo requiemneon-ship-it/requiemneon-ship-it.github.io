@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Crash Test — Sample report</title>
+<style>
+:root{--bg:#0b0d10;--panel:#141820;--text:#edf2f7;--muted:#9aa6b2;--line:#2a3140;--mint:#62f6b5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Arial,sans-serif}
+main{max-width:960px;margin:auto;padding:40px 24px 80px}section{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:24px;margin:18px 0}
+h1{font-size:34px;margin:0 0 6px}h2{margin-top:0}.sub{color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metrics div{background:#0f1319;border:1px solid var(--line);border-radius:12px;padding:14px}.metrics b{display:block;font-size:24px}.metrics span{color:var(--muted);font-size:12px}
+pre{white-space:pre-wrap;background:#0c1015;border:1px solid var(--line);padding:14px;border-radius:10px}
+.critical{color:#ff7b7b;font-weight:800}.ok{color:var(--mint);font-weight:800}a{color:var(--mint)}
+@media(max-width:700px){.metrics{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><main>
+<a href="./">← Agent Crash Test</a>
+<section><h1>Sample Audit</h1><p class="sub">Synthetic duplicate-booking demo. No third-party system was tested.</p>
+<div class="metrics">
+<div><b>3</b><span>original turns</span></div>
+<div><b>2</b><span>minimal turns</span></div>
+<div><b>5/5</b><span>buggy replay</span></div>
+<div><b>0/5</b><span>after fix</span></div>
+</div></section>
+<section>
+<h2 class="critical">CRITICAL — REPEATED_SIDE_EFFECT</h2>
+<p>A non-idempotent booking action was repeated with identical arguments after an unrelated lookup action.</p>
+<h3>Observed action path</h3>
+<pre>create_booking({"slot":"10:00","customer_id":"C-7"})
+lookup_customer({"customer_id":"C-7"})
+create_booking({"slot":"10:00","customer_id":"C-7"})</pre>
+<h3>Minimal reproducer</h3>
+<pre>1. Book the 10:00 slot for customer C-7
+2. Confirm that booking one more time</pre>
+<p><b>Replay:</b> reproduced 5/5 times on the intentionally buggy demo.</p>
+</section>
+<section>
+<h2>Regression artifact</h2>
+<p>The exported case preserves the <code>non_idempotent_tools = ["create_booking"]</code> policy so the failure can be replayed later with the same detection rule.</p>
+<p class="ok">After the demo agent was fixed, the same exported regression reproduced 0/5 times.</p>
+</section>
+<section><h2>Interpretation</h2><p>This report demonstrates the product workflow on a controlled synthetic target. It does not claim the same detection rate on arbitrary production agents.</p></section>
+</main></body></html>
