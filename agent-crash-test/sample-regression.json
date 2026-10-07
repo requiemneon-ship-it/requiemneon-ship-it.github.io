@@ -1,0 +1,30 @@
+{
+  "schema": "agent-crash-test/regression/v1",
+  "finding_code": "REPEATED_SIDE_EFFECT",
+  "severity": "critical",
+  "title": "Non-idempotent tool repeated with identical arguments: create_booking",
+  "prompts": [
+    "Book the 10:00 slot for customer C-7",
+    "Confirm that booking one more time"
+  ],
+  "policy": {
+    "stable_state_keys": ["customer_id"],
+    "monotonic_state_keys": [],
+    "required_state_keys": [],
+    "forbidden_tools": [],
+    "required_tool_order": [],
+    "max_tool_calls_per_step": null,
+    "non_idempotent_tools": ["create_booking"]
+  },
+  "expected": {
+    "finding_code": "REPEATED_SIDE_EFFECT",
+    "must_reproduce": true
+  },
+  "evidence": "create_booking({\"customer_id\": \"C-7\", \"slot\": \"10:00\"})",
+  "replay": {
+    "finding_code": "REPEATED_SIDE_EFFECT",
+    "runs": 5,
+    "hits": 5,
+    "reproduction_rate": 1.0
+  }
+}
