@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Crash Test — Methodology</title>
+<style>
+:root{--bg:#0b0d10;--panel:#141820;--text:#edf2f7;--muted:#9aa6b2;--line:#2a3140;--mint:#62f6b5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 Arial,sans-serif}
+main{max-width:940px;margin:auto;padding:40px 24px 80px}section{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:24px;margin:18px 0}
+h1{font-size:36px;margin:0 0 8px}h2{margin-top:0}.muted{color:var(--muted)}code,pre{font-family:ui-monospace,Consolas,monospace}pre{white-space:pre-wrap;background:#0c1015;border:1px solid var(--line);padding:14px;border-radius:10px}
+a{color:var(--mint)}
+</style></head>
+<body><main>
+<a href="./">← Agent Crash Test</a>
+<section><h1>Methodology</h1><p class="muted">How the current prototype is evaluated and what its numbers do — and do not — prove.</p></section>
+<section>
+<h2>Controlled benchmark</h2>
+<p>The current benchmark contains <b>36 deterministic synthetic cases</b>: <b>25 seeded defect cases</b> and <b>11 clean controls</b>.</p>
+<p>For each case we define the expected finding set before execution. A case passes only when the observed finding set equals the expected set.</p>
+<pre>recall    = true positives / (true positives + false negatives)
+precision = true positives / (true positives + false positives)</pre>
+<p>Current controlled result: recall 100%, precision 100%, FP 0, FN 0.</p>
+<p class="muted">This is not an estimate of production accuracy. The benchmark is small, synthetic and built around the failure classes implemented by the prototype.</p>
+</section>
+<section>
+<h2>Failure workflow</h2>
+<pre>FIND
+  ↓
+SHRINK
+  ↓
+REPLAY
+  ↓
+EXPORT REGRESSION + POLICY
+  ↓
+FIX
+  ↓
+VERIFY FIX</pre>
+<p>A finding is more useful when it is reproducible. The shrinker removes turns while the same finding still appears. The minimized case is replayed several times. The exported regression artifact includes the detection policy when the finding depends on one.</p>
+</section>
+<section>
+<h2>Current deterministic finding classes</h2>
+<p>Repetition loops, duplicate tool calls, identity drift, target exceptions, stable-state violations, monotonic-state regressions, missing required state, forbidden tools, missing required tools, tool-order violations, tool bursts, and repeated non-idempotent side effects.</p>
+</section>
+<section>
+<h2>External pilots</h2>
+<p>External testing requires target-owner authorization and should use staging/demo access. Before sending requests, the preflight validates URL/configuration, environment-backed secrets and the request budget. The runner supports pacing and a hard maximum request count.</p>
+<p>No public third-party agent is automatically probed merely because it has a public demo.</p>
+</section>
+<section>
+<h2>Inspect an artifact</h2>
+<p><a href="./sample-regression.json">Sample regression JSON →</a></p>
+<p><a href="./sample-report.html">Sample human-readable report →</a></p>
+</section>
+</main></body></html>
