@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-10-07",
+  "scope": "controlled synthetic benchmark",
+  "cases": 36,
+  "seeded_defect_cases": 25,
+  "clean_control_cases": 11,
+  "true_positives": 25,
+  "false_positives": 0,
+  "false_negatives": 0,
+  "recall": 1.0,
+  "precision": 1.0,
+  "warning": "These results apply only to the current controlled synthetic benchmark and are not production accuracy claims."
+}
