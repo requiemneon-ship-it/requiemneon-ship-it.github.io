@@ -115,7 +115,7 @@ const startDay=new Date();startDay.setHours(12,0,0,0);
 function dateAt(i){const d=new Date(startDay);d.setDate(d.getDate()+i);return d}
 function dateLabel(i){return dateAt(i).toLocaleDateString("ru-RU",{day:"numeric",month:"short"})}
 function fullDate(i){return dateAt(i).toLocaleDateString("ru-RU",{weekday:"long",day:"numeric",month:"long"})}
-function booked(day,time){return state.bookings.some(x=>x.day===day&&x.time===time)}
+function booked(day,time){const start=Number(time.slice(0,2))*60, end=start+services[state.service].duration;return state.bookings.some(x=>{if(x.day!==day)return false;const other=Number(x.time.slice(0,2))*60;return start<other+x.duration&&other<end})}
 function showServices(){
  $("services").replaceChildren();
  services.forEach((s,i)=>{
@@ -183,7 +183,7 @@ function view(name){
 $("book").onclick=()=>{
  if(!state.time||booked(state.day,state.time))return;
  const s=services[state.service];
- const b={id:state.next++,day:state.day,time:state.time,service:s.name,price:s.price};
+ const b={id:state.next++,day:state.day,time:state.time,service:s.name,price:s.price,duration:s.duration};
  state.bookings.push(b);
  $("success").replaceChildren();
  const note=document.createElement("div");note.className="success";
