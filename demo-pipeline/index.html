@@ -1,0 +1,133 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PipelineMint — интерактивное CRM-демо · КИР НЭЙР</title>
+<meta name="description" content="Проверяемое демо CRM: заявки, Kanban, статусы, приоритеты и потенциальная выручка. Не реальные клиенты.">
+<style>
+:root{--bg:#f0f2f6;--ink:#20273b;--purple:#7055d9;--muted:#768198;--border:#dfe4ee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Arial,sans-serif}
+a{color:inherit}button,input,select{font:inherit}button{cursor:pointer}
+.wrap{width:min(1240px,calc(100% - 32px));margin:auto}
+header{background:#fff;border-bottom:1px solid var(--border);padding:18px 0}
+nav{display:flex;align-items:center;gap:10px}nav strong{font-size:22px;letter-spacing:-.05em}nav strong span{color:var(--purple)}
+nav em{font-style:normal;background:#ede8fc;border-radius:30px;padding:5px 10px;color:#634fb2;font-size:10px;font-weight:850}
+nav a{margin-left:auto;font-size:12px;color:#586478;text-decoration:none}
+.head{padding:43px 0 28px;display:flex;align-items:end;justify-content:space-between;gap:22px}
+.head h1{font-size:clamp(32px,4.5vw,54px);line-height:1.08;letter-spacing:-.06em;margin:6px 0 10px}
+.head p{max-width:650px;color:var(--muted);margin:0}
+.eyebrow{font-size:11px;color:var(--purple);font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.note{border:1px solid #c8baf1;background:#e8e1fb;padding:14px;border-radius:13px;max-width:280px;font-size:12px;color:#57458f}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:white;border:1px solid var(--border);border-radius:15px;padding:20px}
+.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{font-size:28px;display:block;letter-spacing:-.06em;margin:6px 0 2px}.stat small{font-size:11px;color:#806abb}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:27px 0 17px}
+.tools h2{font-size:24px;letter-spacing:-.04em;margin:0 16px 0 0}
+input,select{border:1px solid #cbd2dc;background:white;border-radius:9px;padding:11px;color:var(--ink)}
+.tools input{flex:1;min-width:130px}
+.btn{padding:11px 16px;border:0;border-radius:10px;background:var(--purple);color:white;font-weight:800;font-size:13px}
+.btn.secondary{background:#e1e5eb;color:#344052}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.column{border-radius:15px;border:1px solid #dbe0e8;background:#e9edf4;padding:12px;min-height:325px}
+.column h3{font-size:13px;margin:5px 3px 15px}
+.column h3 b{float:right;font-size:11px;color:var(--muted);background:white;border-radius:10px;padding:3px 9px}
+.cards{display:grid;gap:10px}
+.card{background:white;padding:15px;border:1px solid #dce0ea;border-radius:13px;box-shadow:0 4px 10px #293a5908}
+.card small{color:#8790a1}.card .score{float:right;background:#ece8fc;color:#6245ba;border-radius:40px;padding:3px 8px;font-size:10px;font-weight:800}
+.card h4{margin:14px 0 4px;font-size:15px}.card p{margin:0 0 12px;color:#6c778a;font-size:12px}
+.card strong{display:block;font-size:18px;letter-spacing:-.04em}.card select{margin-top:12px;width:100%;font-size:11px}
+.empty{font-size:12px;color:#9da7b4;padding:15px;text-align:center}
+.insight{margin:20px 0 44px;padding:22px;border-radius:15px;border:1px solid var(--border);background:white;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.insight strong{font-size:18px}.insight p{font-size:12px;color:var(--muted);margin:6px 0}
+.insight b{font-size:38px;color:var(--purple)}
+dialog{border:0;border-radius:18px;padding:26px;width:min(480px,calc(100% - 32px));box-shadow:0 25px 80px #111b384c}
+dialog::backdrop{background:#17203888}dialog h2{margin:0 0 12px;font-size:24px}
+label{display:block;font-size:12px;font-weight:800;margin:12px 0}
+label input,label select{display:block;width:100%;margin:6px 0 0}
+.buttons{display:flex;gap:10px;justify-content:end;margin-top:20px}
+footer{background:#20273b;color:#ccd0e4;padding:25px 0;font-size:12px;line-height:1.75}footer a{color:#d0c5ff}
+@media(max-width:950px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}.metrics{grid-template-columns:repeat(2,1fr)}.head{display:block}.note{max-width:none;margin:19px 0 0}}
+@media(max-width:550px){.board{grid-template-columns:1fr}.stat{padding:12px}.stat strong{font-size:25px}.tools h2{width:100%}.head{padding-top:28px}.insight{display:block}.tools .btn{font-size:11px}}
+</style></head><body>
+<header><nav class="wrap"><strong>Pipeline<span>Mint</span></strong><em>ЖИВОЕ ДЕМО · ТЕСТОВЫЕ ДАННЫЕ</em><a href="/business/">← КИР НЭЙР</a></nav></header>
+<main class="wrap">
+<div class="head"><div><div class="eyebrow">Демонстрация CRM-логики</div><h1>Все заявки. Без хаоса.</h1>
+<p>Передвигайте заявки между этапами, найдите клиента или добавьте тестовую задачу. Посмотрите, как меняются показатели воронки.</p></div>
+<div class="note"><strong>Это не настоящая CRM.</strong> Компании, проекты и деньги вымышлены. Все изменения существуют только во вкладке до обновления страницы.</div></div>
+<div class="metrics">
+<div class="stat"><span>Активные заявки</span><strong id="active">0</strong><small>Не завершены</small></div>
+<div class="stat"><span>Оценка воронки</span><strong id="pipeline">0 ₽</strong><small>Не подтверждённый доход</small></div>
+<div class="stat"><span>Высокий приоритет</span><strong id="hot">0</strong><small>Скоринг 70+</small></div>
+<div class="stat"><span>Закрыто в демо</span><strong id="done">0</strong><small>Только тестовые</small></div></div>
+<div class="tools"><h2>Воронка продаж</h2><input id="search" type="search" placeholder="Найти компанию или задачу" aria-label="Поиск по заявкам"><button class="btn secondary" id="reset" type="button">Сбросить</button><button class="btn" id="add" type="button">+ Заявка</button></div>
+<section class="board" id="board">
+<div class="column" data-stage="new"><h3>Новые <b>0</b></h3><div class="cards"></div></div>
+<div class="column" data-stage="work"><h3>В работе <b>0</b></h3><div class="cards"></div></div>
+<div class="column" data-stage="review"><h3>На согласовании <b>0</b></h3><div class="cards"></div></div>
+<div class="column" data-stage="done"><h3>Завершено <b>0</b></h3><div class="cards"></div></div>
+</section>
+<section class="insight"><div><strong>На чём сфокусироваться?</strong><p id="brief">Высокоприоритетные задачи.</p></div><b id="focus">0</b></section>
+</main>
+<dialog id="dialog"><form id="form">
+<h2>Новая тестовая заявка</h2>
+<label>Компания<input id="company" maxlength="55" placeholder="Студия Север" required></label>
+<label>Что нужно сделать<input id="task" maxlength="80" placeholder="Исправить уведомления" required></label>
+<label>Бюджет, ₽<input id="budget" type="number" min="0" max="10000000" value="12000" required></label>
+<label>Приоритет<select id="priority"><option value="80">Высокий</option><option value="55">Обычный</option><option value="30">Низкий</option></select></label>
+<div class="buttons"><button id="cancel" class="btn secondary" type="button">Отмена</button><button class="btn" type="submit">Создать</button></div>
+</form></dialog>
+<footer><div class="wrap">КИР НЭЙР · Интерактивная браузерная демонстрация на тестовых данных. Публичный код оригинального проекта: <a href="https://github.com/requiemneon-ship-it/pipeline-mint" target="_blank" rel="noopener noreferrer">PipelineMint</a>. Не подключены авторизация, постоянная база и интеграции.<br>Нужна подобная панель для бизнеса? <a href="https://t.me/ai_ivan_7042_bot?start=site_pipeline_demo" target="_blank" rel="noopener noreferrer">Запросить расчёт ↗</a></div></footer>
+<script>
+"use strict";
+const original=[
+{id:1,company:"Мастерская Север",task:"Сбор заявок через Telegram",budget:19000,priority:88,stage:"new"},
+{id:2,company:"Студия Олива",task:"Связать формы сайта с CRM",budget:39000,priority:81,stage:"work"},
+{id:3,company:"Сервис Бета",task:"Починить бота уведомлений",budget:5900,priority:65,stage:"review"},
+{id:4,company:"Детейлинг Восток",task:"Система онлайн-записи",budget:28000,priority:51,stage:"new"},
+{id:5,company:"Магазин Точка",task:"Сайт-визитка",budget:18000,priority:43,stage:"done"}
+];
+const stages=[["new","Новые"],["work","В работе"],["review","На согласовании"],["done","Завершено"]];
+const state={items:original.map(x=>({...x})),next:6};
+const $=id=>document.getElementById(id);
+const rub=n=>new Intl.NumberFormat("ru-RU").format(n)+" ₽";
+function render(){
+ const active=state.items.filter(x=>x.stage!=="done");
+ $("active").textContent=active.length;
+ $("pipeline").textContent=rub(active.reduce((sum,x)=>sum+x.budget,0));
+ const hot=active.filter(x=>x.priority>=70).sort((a,b)=>b.priority-a.priority);
+ $("hot").textContent=hot.length;
+ $("done").textContent=state.items.length-active.length;
+ $("focus").textContent=hot.length;
+ $("brief").textContent=hot.length?"Первый приоритет: "+hot[0].company+" — "+hot[0].task+". Уточните следующий шаг.":"Срочных заявок нет. Проверьте новые обращения.";
+ const q=$("search").value.toLocaleLowerCase("ru").trim();
+ for(const [stage,title] of stages){
+  const column=document.querySelector('[data-stage="'+stage+'"]');
+  const grid=column.querySelector(".cards");grid.replaceChildren();
+  const items=state.items.filter(x=>x.stage===stage&&(x.company+" "+x.task).toLocaleLowerCase("ru").includes(q));
+  column.querySelector("h3 b").textContent=items.length;
+  if(!items.length){const el=document.createElement("div");el.className="empty";el.textContent=q?"Совпадений нет":"Пока пусто";grid.append(el)}
+  for(const item of items){
+   const card=document.createElement("article");card.className="card";
+   const meta=document.createElement("small");meta.textContent="Тестовая заявка #"+item.id;
+   const score=document.createElement("span");score.className="score";score.textContent=item.priority+" / 100";
+   const name=document.createElement("h4");name.textContent=item.company;
+   const task=document.createElement("p");task.textContent=item.task;
+   const budget=document.createElement("strong");budget.textContent=rub(item.budget);
+   const select=document.createElement("select");select.setAttribute("aria-label","Этап "+item.company);
+   for(const [id,label] of stages){const option=document.createElement("option");option.value=id;option.textContent=label;select.append(option)}
+   select.value=item.stage;select.onchange=()=>{item.stage=select.value;render()};
+   card.append(meta,score,name,task,budget,select);grid.append(card)
+  }
+ }
+}
+$("search").oninput=render;
+$("reset").onclick=()=>{state.items=original.map(x=>({...x}));state.next=6;$("search").value="";render()};
+$("add").onclick=()=>$("dialog").showModal();
+$("cancel").onclick=()=>$("dialog").close();
+$("form").onsubmit=e=>{
+ e.preventDefault();
+ const company=$("company").value.trim(),task=$("task").value.trim(),budget=Number($("budget").value),priority=Number($("priority").value);
+ if(!company||!task||!Number.isFinite(budget)||budget<0||budget>10000000)return;
+ state.items.unshift({id:state.next++,company,task,budget,priority,stage:"new"});
+ $("form").reset();$("dialog").close();render()
+};
+render();
+</script></body></html>
