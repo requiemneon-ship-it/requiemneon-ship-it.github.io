@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telegram-боты и автоматизация бизнеса под конкретную задачу — KIR NEIR</title>
+<meta name="description" content="Починим существующего Telegram-бота, настроим приём заявок и уведомления, подключим CRM и таблицы. Понятная стоимость, живое демо, оценка без обязательств.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Перестаньте терять заявки в Telegram">
+<meta property="og:description" content="Работающие боты, исправление ошибок и небольшая автоматизация. Демонстрация до заказа, цена после уточнения задачи.">
+<meta name="theme-color" content="#0a1018">
+<style>
+:root{color-scheme:dark;--bg:#0a1018;--panel:#101925;--panel2:#15212e;--line:#293747;--ink:#f0f6f7;--muted:#a6b6bf;--mint:#84f4c2;--gold:#f3c878}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;background:rgba(10,16,24,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:3}
+nav{display:flex;align-items:center;gap:20px;min-height:68px}
+.brand{font-weight:850;letter-spacing:.03em}
+.brand span,.eyebrow{color:var(--mint)}
+nav .push{margin-left:auto}
+nav .smalllink{font-size:14px;color:var(--muted)}
+.hero{padding:94px 0 74px;background:radial-gradient(ellipse at 80% 15%,rgba(132,244,194,.1),transparent 52%),radial-gradient(ellipse at 10% 70%,rgba(59,130,246,.09),transparent 48%)}
+.eyebrow{font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.14em;margin:0 0 18px}
+h1{font-size:clamp(37px,6.4vw,72px);line-height:1.06;letter-spacing:-.05em;max-width:870px;margin:0 0 22px}
+.lead{max-width:690px;font-size:19px;color:var(--muted);margin:0 0 32px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:12px 20px;border-radius:11px;border:1px solid var(--line);background:var(--panel2);font-weight:700}
+.btn:hover{filter:brightness(1.12)}
+.btn.primary{background:var(--mint);border-color:var(--mint);color:#071912}
+.evidence{margin:34px 0 0;display:flex;gap:10px;flex-wrap:wrap}
+.pill{display:inline-block;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:5px 12px;font-size:12px}
+main section{padding:64px 0}
+h2{font-size:clamp(28px,4vw,40px);line-height:1.14;letter-spacing:-.035em;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:760px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{display:flex;flex-direction:column;gap:12px;background:linear-gradient(155deg,#172332,#101923);border:1px solid var(--line);border-radius:18px;padding:25px;min-height:350px}
+.card.featured{border-color:rgba(132,244,194,.6);box-shadow:0 0 0 1px rgba(132,244,194,.12)}
+.kicker{color:var(--mint);text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:.12em}
+.card h3{font-size:22px;line-height:1.24;margin:0}
+.card p{color:var(--muted);margin:0}
+.price{font-size:34px;font-weight:850;letter-spacing:-.035em;margin-top:4px}
+.price small{font-size:13px;color:var(--muted);letter-spacing:0;font-weight:500}
+.card ul{margin:2px 0 10px;padding-left:18px;color:#c0ced6;font-size:14px;flex:1}
+.card li{margin:6px 0}
+.card a.btn{width:100%}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.flow article{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:22px}
+.flow b{display:block;color:var(--gold);font-size:12px;margin-bottom:9px}
+.flow h3{margin:0 0 8px;font-size:18px}
+.flow p{color:var(--muted);margin:0;font-size:14px}
+.demo{border:1px solid rgba(132,244,194,.3);border-radius:22px;padding:32px;background:linear-gradient(105deg,rgba(132,244,194,.09),rgba(46,113,154,.08))}
+.demo p{color:var(--muted);max-width:790px}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center}
+ol.steps{padding-left:24px;color:#bdcdd6}
+ol.steps li{padding:6px 0}
+.faq details{border-bottom:1px solid var(--line);padding:17px 0}
+.faq summary{font-weight:700;cursor:pointer}
+.faq p{color:var(--muted);margin-bottom:0}
+.closing{border:1px solid var(--line);background:var(--panel);border-radius:25px;text-align:center;padding:48px 24px}
+.closing h2{margin-bottom:10px}
+.closing p{color:var(--muted);margin:0 0 23px}
+footer{color:#7f95a2;border-top:1px solid var(--line);padding:26px 0;font-size:13px}
+footer a{text-decoration:underline}
+@media(max-width:920px){.grid{grid-template-columns:1fr}.card{min-height:unset}.flow{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{padding:60px 0 40px}.lead{font-size:16px}.actions .btn{width:100%}nav .smalllink{display:none}.demo{padding:21px}main section{padding:42px 0}}
+</style>
+</head>
+<body>
+<header><nav class="wrap">
+  <a class="brand" href="/">KIR <span>NEIR</span> / BUSINESS</a>
+  <span class="push"></span><a class="smalllink" href="#price">Услуги и цены</a><a class="smalllink" href="#demo">Демо</a>
+  <a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_main" target="_blank" rel="noopener">Обсудить задачу ↗</a>
+</nav></header>
+<main>
+<div class="hero"><div class="wrap">
+  <p class="eyebrow">Боты · сайты · автоматизация · небольшие задачи</p>
+  <h1>Клиент написал.<br>Заявка дошла.<br><span style="color:var(--mint)">Никто не забыл ответить.</span></h1>
+  <p class="lead">Если заявки теряются в переписках, бот сломался или сотрудники вручную переписывают данные — исправим конкретный процесс. Без сложного внедрения ради внедрения.</p>
+  <div class="actions"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_audit" target="_blank" rel="noopener">Оценить мою задачу бесплатно ↗</a><a class="btn" href="https://t.me/ai_ivan_7042_bot?start=formdemo" target="_blank" rel="noopener">Открыть работающее демо</a></div>
+  <div class="evidence"><span class="pill">Публичные примеры кода</span><span class="pill">Сначала согласуем объём</span><span class="pill">Без навязанных подписок</span></div>
+</div></div>
+<section id="price"><div class="wrap">
+  <h2>Три понятные задачи — три способа начать</h2>
+  <p class="sub">Цены — стартовые ориентиры для небольшого объёма работ, а не обещание сделать неограниченное ТЗ за фиксированную сумму. Точная стоимость после уточнения требований.</p>
+  <div class="grid">
+    <article class="card">
+      <span class="kicker">01 / срочная помощь</span><h3>Бот перестал работать?</h3>
+      <p>Диагностика и исправление одной воспроизводимой ошибки в доступном исходном коде.</p>
+      <div class="price">от 4 900 ₽ <small>за согласованную задачу</small></div>
+      <ul><li>Разберём воспроизводимый сбой</li><li>Опишем причину и план исправления</li><li>Проверим результат на тестовой среде</li></ul>
+      <a class="btn" href="https://t.me/ai_ivan_7042_bot?start=site_repair" target="_blank" rel="noopener">Узнать стоимость починки ↗</a>
+    </article>
+    <article class="card featured">
+      <span class="kicker">02 / быстрый запуск</span><h3>Бот для приёма заявок</h3>
+      <p>Клиент отвечает на вопросы, вы получаете структурированную заявку вместо длинной переписки.</p>
+      <div class="price">от 9 900 ₽ <small>за базовый сценарий</small></div>
+      <ul><li>До 10 вопросов и проверка ответов</li><li>Хранение заявок и выгрузка CSV</li><li>Уведомление владельца</li><li>Инструкция по запуску</li></ul>
+      <a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_leads" target="_blank" rel="noopener">Хочу такого бота ↗</a>
+    </article>
+    <article class="card">
+      <span class="kicker">03 / автоматизация</span><h3>Связать чаты, таблицы и CRM</h3>
+      <p>Убрать ручное копирование данных, отчёты «на коленке» и путаницу со статусами.</p>
+      <div class="price">от 19 900 ₽ <small>после оценки интеграций</small></div>
+      <ul><li>Один согласованный процесс</li><li>API, таблица или CRM</li><li>Логи ошибок и инструкция</li><li>Проверка на тестовых данных</li></ul>
+      <a class="btn" href="https://t.me/ai_ivan_7042_bot?start=site_integrations" target="_blank" rel="noopener">Разобрать процесс ↗</a>
+    </article>
+  </div>
+  <p class="sub" style="margin:18px 0 0">Нужны AI-ассистент, сайт, Mini App или веб-приложение? Берёмся после отдельного технического разбора и оценки. Не выдаём сложную разработку за «бота за вечер».</p>
+</div></section>
+<section id="demo"><div class="wrap">
+  <div class="demo split">
+    <div><p class="eyebrow">Не презентация — действующий сценарий</p><h2>Пройдите путь собственного клиента</h2>
+    <p>Откройте демонстрационного AI Ивана и проверьте анкету: десять шагов, сохранение ответов и экспорт. Это пример механики — не чужой коммерческий кейс и не обещание роста продаж.</p>
+    <div class="actions"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=formdemo" target="_blank" rel="noopener">Попробовать демо ↗</a><a class="btn" href="https://github.com/requiemneon-ship-it/telegram-lead-bot" target="_blank" rel="noopener">Посмотреть код ↗</a></div></div>
+    <div><ol class="steps"><li>Покупатель сам открывает бота</li><li>Бот задаёт уточняющие вопросы</li><li>Ответы попадают в базу</li><li>Владелец получает структурированную заявку</li></ol></div>
+  </div>
+</div></section>
+<section><div class="wrap">
+  <h2>Как проходит заказ</h2><p class="sub">Начинаем с конкретной проблемы. Работу и цену согласуем до старта.</p>
+  <div class="flow">
+    <article><b>ШАГ 01</b><h3>Коротко описываете задачу</h3><p>Что сломано или что занимает лишнее время? Какие системы уже используете?</p></article>
+    <article><b>ШАГ 02</b><h3>Получаете предложение</h3><p>Объём работ, условия проверки, цена, сроки и что от вас потребуется. Если задача не подходит, скажем прямо.</p></article>
+    <article><b>ШАГ 03</b><h3>Проверяете готовый результат</h3><p>Работающий сценарий, исходники по договорённости и инструкция. Хостинг и сторонние подписки обсуждаются отдельно.</p></article>
+  </div>
+</div></section>
+<section class="faq"><div class="wrap">
+  <h2>Что важно до заказа</h2>
+  <details><summary>Нужно ли покупать сервер заранее?</summary><p>Нет. Для оценки и демонстрации расходов не требуется. Для круглосуточной работы реального клиентского бота нужен хостинг или компьютер, который постоянно включён; бюджет согласуем отдельно.</p></details>
+  <details><summary>Вы обещаете увеличение продаж?</summary><p>Нет, без данных такого обещать нельзя. Мы отвечаем за согласованную техническую функцию — например, чтобы пришедшие в бот заявки сохранялись и передавались владельцу.</p></details>
+  <details><summary>Можно показать только одну ошибку или маленькую задачу?</summary><p>Да, это лучший старт: одну конкретную проблему проще оценить, проверить и закрыть с понятным результатом.</p></details>
+  <details><summary>Что нужно для оценки?</summary><p>Описание проблемы, пример желаемого результата и используемые сервисы. Не присылайте пароли, API-токены и доступы на этапе оценки.</p></details>
+</div></section>
+<section><div class="wrap">
+  <div class="closing"><p class="eyebrow">Первый шаг — без оплаты</p><h2>Опишите задачу в двух предложениях</h2><p>Ответим, входит ли она в быстрый пакет, что потребуется и как оценить стоимость.</p>
+    <div class="actions" style="justify-content:center"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_final" target="_blank" rel="noopener">Перейти к AI Ивану ↗</a></div>
+  </div>
+</div></section>
+</main><footer><div class="wrap">KIR NEIR · Разработка небольших IT-решений · <a href="/">Портфолио</a> · <a href="https://github.com/requiemneon-ship-it" target="_blank" rel="noopener">Примеры кода</a> · <a href="https://t.me/ai_ivan_7042_bot" target="_blank" rel="noopener">Telegram</a><br>Цены ориентировочные. Договорённости, сроки и состав работы фиксируются после обсуждения.</div></footer>
+</body></html>
