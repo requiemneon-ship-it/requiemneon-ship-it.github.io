@@ -36,19 +36,19 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ff
 .btn-lime{background:var(--lime);color:var(--dark)}
 .btn-ghost{background:transparent;color:var(--dark)}
 .btn-white{background:white;color:var(--dark);border-color:white}
-.nav-cta{margin-left:auto}
+.nav-cta{margin-left:auto}.nav-mobile{display:none}
 .eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 23px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:850}
 .dot{display:inline-block;background:#7eae42;border-radius:100%;height:8px;width:8px}
 .hero{padding:89px 0 100px;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:45px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:45px;align-items:center}.hero-grid>*{min-width:0}
 .hero h1{font-size:clamp(49px,5.6vw,80px);line-height:1.04;letter-spacing:-.079em;font-weight:900;max-width:730px;margin:0}
 .hero h1 em{font-style:normal;color:#5b7a49}
 .hero .lead{font-size:19px;max-width:580px;color:#526164;margin:26px 0 27px}
 .hero .actions{display:flex;flex-wrap:wrap;gap:10px}
 .subnote{font-size:12px;color:#637275;margin:20px 0 0;max-width:500px}
-.hero-art{position:relative;min-height:445px;display:grid;align-items:center}
+.hero-art{position:relative;min-width:0;min-height:445px;display:grid;align-items:center}
 .hero-art:before{content:"";position:absolute;width:380px;height:380px;background:var(--lime);border-radius:46% 54% 58% 42%;right:-40px;top:20px;filter:blur(.5px);transform:rotate(16deg)}
-.window{position:relative;max-width:475px;background:#fff;border:1px solid #bdc9c3;border-radius:20px;overflow:hidden;box-shadow:0 28px 70px rgba(28,40,31,.18);transform:rotate(2deg);margin:auto}
+ .window{position:relative;width:min(100%,475px);max-width:475px;background:#fff;border:1px solid #bdc9c3;border-radius:20px;overflow:hidden;box-shadow:0 28px 70px rgba(28,40,31,.18);transform:rotate(2deg);margin:auto}
 .windowbar{display:flex;align-items:center;padding:17px 19px;gap:6px;background:#f1f4f2;border-bottom:1px solid #e1e6e1}
 .windowbar i{height:8px;width:8px;border-radius:50%;background:#b7c7bd}
 .windowbar .address{margin:auto;font-size:11px;font-weight:850;letter-spacing:.035em;color:#657672}
@@ -144,13 +144,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ff
 @media(max-width:640px){
  .shell{width:calc(100% - 32px)}
  .nav{height:68px;gap:12px}
- .logo{font-size:20px}.logo small{font-size:8px}
- .nav-cta{font-size:12px;min-height:42px;padding:8px 11px}
+ .logo{font-size:19px}.logo small{font-size:8px}
+ .nav-cta{font-size:12px;min-height:42px;padding:8px 11px;white-space:nowrap}.nav-desktop{display:none}.nav-mobile{display:inline}
  .hero{padding:55px 0 42px}
  .hero h1{font-size:clamp(44px,11.8vw,66px)}
- .hero .lead{font-size:16px}
+ .hero .lead{font-size:16px;overflow-wrap:anywhere}
  .hero .actions .btn{width:100%}
- .hero-art{min-height:345px;margin:20px 0}
+ .hero-art{min-height:345px;margin:20px 0;width:100%}
  .window{transform:rotate(1deg)}
  .spark{right:0;bottom:6px;font-size:11px}
  .marquee-inner{justify-content:flex-start;gap:12px}
@@ -171,7 +171,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ff
   <nav class="shell nav" aria-label="Основное меню">
     <a class="logo" href="/" aria-label="Кир Нэйр — главное портфолио"><span class="symbol">K<span style="font-size:17px">/</span></span><span>КИР НЭЙР<small>РАЗРАБОТКА И АВТОМАТИЗАЦИЯ</small></span></a>
     <div class="navlinks"><a href="#services">Решения</a><a href="#proof">Реальная работа</a><a href="#about">Кто отвечает</a></div>
-    <a class="btn btn-dark nav-cta" href="https://t.me/ai_ivan_7042_bot?start=site_human" target="_blank" rel="noopener noreferrer">Обсудить с разработчиком ↗</a>
+    <a class="btn btn-dark nav-cta" href="https://t.me/ai_ivan_7042_bot?start=site_human" target="_blank" rel="noopener noreferrer"><span class="nav-desktop">Обсудить с разработчиком</span><span class="nav-mobile">Связаться</span> ↗</a>
   </nav>
 </header>
 <main>
