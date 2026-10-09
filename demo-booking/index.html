@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Интерактивное демо онлайн-записи детейлинга: услуга, дата, время, кабинет владельца. Прототип КИР НЭЙР, данные тестовые.">
+<title>DETAIL / Интерактивная демозапись · КИР НЭЙР</title>
+<style>
+:root{--bg:#eeece8;--ink:#1c2827;--muted:#65726d;--cream:#f9f8f4;--stroke:#d4d9d4;--a:#d5f4a8;--shade:#172423;color-scheme:light;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}button,input{font:inherit}button{cursor:pointer}
+.wrap{width:min(1050px,calc(100% - 32px));margin:auto}
+header{border-bottom:1px solid var(--stroke);background:var(--cream)}
+nav{height:65px;display:flex;align-items:center;gap:14px}
+.brand{font-weight:900;letter-spacing:-.05em;font-size:25px}.brand em{font-style:normal;color:#729354}
+.tag{border-radius:100px;padding:6px 11px;background:#e5ece4;font-size:10px;letter-spacing:.1em;font-weight:900}
+.back{margin-left:auto;font-size:13px;color:var(--muted);text-decoration:none}
+.hero{padding:59px 0 35px;display:flex;align-items:end;justify-content:space-between;gap:22px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:850;color:#637f50}
+h1{font-size:clamp(34px,6vw,65px);letter-spacing:-.07em;line-height:1.03;margin:9px 0 12px}
+.hero p:not(.eyebrow){color:var(--muted);margin:0;line-height:1.6;max-width:630px}
+.note{border:1px solid #bacaa5;background:#e7f0d7;border-radius:13px;padding:13px 16px;font-size:12px;line-height:1.5;max-width:280px}
+.mode{display:flex;align-items:center;gap:5px;padding:5px;background:#e1e3dd;border-radius:12px;width:max-content;margin:0 0 18px}
+.mode button{border:0;border-radius:9px;padding:11px 18px;background:transparent;color:#56645e;font-size:13px;font-weight:750}
+.mode button[aria-selected=true]{background:var(--shade);color:white}
+.layout{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;padding-bottom:55px}
+.panel{border:1px solid var(--stroke);background:var(--cream);border-radius:19px;overflow:hidden}
+.panel .pad{padding:27px}.panel h2{margin:0;font-size:25px;letter-spacing:-.05em}
+.panel .sm{font-size:13px;color:#76827b;margin-top:7px}
+.section-label{font-size:11px;font-weight:850;letter-spacing:.13em;text-transform:uppercase;color:#69825b;margin:26px 0 12px}
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.service{background:white;border:1.5px solid var(--stroke);border-radius:13px;text-align:left;padding:17px 12px;min-height:110px}
+.service[aria-pressed=true]{border-color:#638753;box-shadow:0 0 0 2px #b7d89e;background:#f7fff0}
+.service .emoji{font-size:23px;display:block;margin-bottom:14px}
+.service strong{display:block;font-size:13px}.service small{display:block;margin-top:5px;color:#67746e;font-size:11px}
+.dates,.slots{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.day,.time{border:1px solid var(--stroke);background:white;border-radius:10px;min-height:61px;font-size:12px;font-weight:700}
+.day small{display:block;color:#65746d;font-size:10px;margin-bottom:5px}
+.day[aria-pressed=true],.time[aria-pressed=true]{background:var(--shade);color:white;border-color:var(--shade)}
+.day[aria-pressed=true] small{color:#c4d6b5}
+.slots{grid-template-columns:repeat(4,1fr)}
+.time{min-height:41px}.time:disabled{background:#f0f0ed;color:#afbab2;cursor:not-allowed;text-decoration:line-through}
+.button{display:flex;align-items:center;justify-content:center;border:0;border-radius:11px;background:var(--shade);color:white;min-height:50px;padding:12px 17px;font-weight:800;font-size:14px;text-decoration:none;width:100%}
+.button:disabled{background:#acb6ac;cursor:not-allowed}
+.button.secondary{background:#ebeee7;color:#1b2926;border:1px solid #cdd9c9}
+.receipt{padding:24px}.receipt h3{margin:0;font-size:20px;letter-spacing:-.04em}
+.receipt .summary{padding:20px 0;margin:18px 0;border-top:1px solid #e4e6df;border-bottom:1px solid #e4e6df}
+.pair{display:flex;justify-content:space-between;gap:14px;font-size:13px;padding:7px 0}
+.pair span{color:#6e7b74}.pair strong{text-align:right}
+.tip{background:#e9efde;padding:15px;border-radius:11px;font-size:12px;line-height:1.55;color:#546947;margin-bottom:17px}
+.success{background:#e5f4dd;border:1px solid #bad4af;border-radius:11px;padding:15px;font-size:13px;line-height:1.5;margin-bottom:16px}
+.owner-layout{display:none;padding-bottom:55px}.owner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.stat{padding:22px;border-radius:17px;background:white;border:1px solid var(--stroke)}
+.stat b{display:block;font-size:30px;letter-spacing:-.06em}.stat span{color:#6f8073;font-size:12px}
+.bookings{width:100%;border-collapse:collapse;font-size:14px}.bookings th{text-align:left;color:#6b786d;font-size:12px;padding:14px;border-bottom:1px solid #dce3da}.bookings td{padding:14px;border-bottom:1px solid #e7eae4}
+.status{font-size:11px;border-radius:40px;padding:5px 8px;background:#e7f4df;color:#476e31;font-weight:800}
+.cancel{background:white;border:1px solid #cbd3cc;border-radius:9px;padding:7px 10px;font-size:12px}
+.empty{padding:30px;font-size:13px;color:var(--muted)}
+footer{background:var(--shade);color:#a5bdb0;padding:25px 0;font-size:12px;line-height:1.7}
+footer a{color:#ddf7b5}
+@media(max-width:760px){.hero{display:block;padding-top:35px}.note{max-width:none;margin:18px 0 0}.layout,.owner-grid{grid-template-columns:1fr}.dates{grid-template-columns:repeat(7,minmax(0,1fr))}.panel .pad{padding:19px}.hero h1{font-size:44px}.services{gap:6px}.service{padding:12px 8px}.service strong{font-size:12px}.service small{font-size:10px}.bookings th,.bookings td{padding:9px 6px;font-size:11px}}
+@media(max-width:420px){.brand{font-size:21px}.tag{font-size:9px;padding:5px 7px}.back{font-size:11px}.day{font-size:11px;min-width:0}.day small{font-size:9px}.date{font-size:12px}}
+</style>
+</head>
+<body>
+<header><nav class="wrap"><span class="brand">DETAIL<span style="color:#849b77">/</span><em>BOOK</em></span><span class="tag">ЖИВОЕ ДЕМО · НЕ ЗАКАЗ</span><a class="back" href="/business/">← КИР НЭЙР</a></nav></header>
+<main class="wrap">
+<section class="hero"><div>
+<p class="eyebrow">Демонстрация продукта / онлайн-запись</p>
+<h1>Мойка без звонков.<br>Расписание без хаоса.</h1>
+<p>Выберите услугу и свободное время. Потом переключитесь в кабинет владельца — бронь появится в списке. Всё работает прямо в браузере.</p></div>
+<div class="note"><strong>Тестовый режим.</strong> Здесь нет настоящих клиентов, телефонов и сервера бронирования. Данные живут только на этой странице до её обновления.</div>
+</section>
+<div class="mode" role="tablist" aria-label="Режим просмотра"><button id="clientTab" role="tab" aria-selected="true" type="button">Я клиент</button><button id="ownerTab" role="tab" aria-selected="false" type="button">Я владелец</button></div>
+<div class="layout" id="clientView">
+ <section class="panel"><div class="pad">
+  <h2>Записаться на услугу</h2><p class="sm">Три шага. Место резервируется только в этой демонстрации.</p>
+  <div class="section-label">01. Выберите услугу</div>
+  <div class="services" id="services"></div>
+  <div class="section-label">02. Удобный день</div>
+  <div class="dates" id="dates"></div>
+  <div class="section-label">03. Свободное время</div>
+  <div class="slots" id="slots"></div>
+ </div></section>
+ <aside class="panel"><div class="receipt">
+   <h3>Ваша запись</h3><p class="sm">Все детали перед подтверждением</p>
+   <div class="summary" id="summary"></div>
+   <div class="tip">💡 После записи нажмите «Я владелец» вверху и посмотрите, как она появилась в рабочем расписании.</div>
+   <div id="success" aria-live="polite"></div>
+   <button class="button" id="book" type="button">Забронировать в демо ↗</button>
+   <p class="sm">Никаких реальных клиентов и платежей — только проверка сценария.</p>
+ </div></aside>
+</div>
+<div class="owner-layout" id="ownerView">
+ <div class="owner-grid"><div class="stat"><b id="count">0</b><span>Записей в текущем демо</span></div><div class="stat"><b id="revenue">0 ₽</b><span>Потенциальная стоимость услуг (не доход)</span></div><div class="stat"><b id="occupancy">0</b><span>Занятых временных окон</span></div></div>
+ <div class="panel"><div class="pad"><h2>Рабочее расписание</h2><p class="sm">Здесь отображаются только записи, созданные вами на этой странице. Перезагрузка сбрасывает демоданные.</p>
+ <div style="overflow-x:auto"><table class="bookings"><thead><tr><th>Дата</th><th>Время</th><th>Услуга</th><th>Стоимость</th><th>Состояние</th><th></th></tr></thead><tbody id="rows"></tbody></table></div><div id="empty" class="empty">Пока нет тестовых записей. Перейдите в «Я клиент» и добавьте одну.</div>
+ </div></div>
+ <p style="font-size:13px;margin-top:14px;color:#65756d">В настоящем продукте есть отдельный сервер, администрирование и хранение данных. Эта публичная версия намеренно показывает клиентский сценарий без доступа к реальным данным.</p>
+</div>
+</main>
+<footer><div class="wrap">
+<strong>КИР НЭЙР · Реальный прототип, интерактивный браузерный симулятор.</strong>
+<div>Источник и полноценная Node.js-версия: <a href="https://github.com/requiemneon-ship-it/detailing-booking" target="_blank" rel="noopener noreferrer">открыть репозиторий</a>. Чтобы заказать адаптацию для своего бизнеса: <a href="https://t.me/ai_ivan_7042_bot?start=site_booking_demo" target="_blank" rel="noopener noreferrer">обсудить задачу с разработчиком ↗</a>.</div>
+</div></footer>
+<script>
+"use strict";
+const services=[
+ {id:"wash",name:"Комплексная мойка",price:1400,duration:60,emoji:"💧"},
+ {id:"interior",name:"Химчистка салона",price:5200,duration:180,emoji:"🫧"},
+ {id:"polish",name:"Полировка кузова",price:7900,duration:240,emoji:"✨"}
+];
+const state={service:0,day:0,time:"",bookings:[],next:1};
+const $=id=>document.getElementById(id);
+const formatRub=n=>new Intl.NumberFormat("ru-RU").format(n)+" ₽";
+const startDay=new Date();startDay.setHours(12,0,0,0);
+function dateAt(i){const d=new Date(startDay);d.setDate(d.getDate()+i);return d}
+function dateLabel(i){return dateAt(i).toLocaleDateString("ru-RU",{day:"numeric",month:"short"})}
+function fullDate(i){return dateAt(i).toLocaleDateString("ru-RU",{weekday:"long",day:"numeric",month:"long"})}
+function booked(day,time){return state.bookings.some(x=>x.day===day&&x.time===time)}
+function showServices(){
+ $("services").replaceChildren();
+ services.forEach((s,i)=>{
+  const el=document.createElement("button");el.type="button";el.className="service";el.setAttribute("aria-pressed",String(i===state.service));
+  el.innerHTML='<span class="emoji"></span><strong></strong><small></small>';
+  el.querySelector(".emoji").textContent=s.emoji;
+  el.querySelector("strong").textContent=s.name;
+  el.querySelector("small").textContent=s.duration+" мин · "+formatRub(s.price);
+  el.onclick=()=>{state.service=i;state.time="";render()};
+  $("services").append(el)
+ })
+}
+function showDates(){
+ $("dates").replaceChildren();
+ for(let i=0;i<7;i++){
+  const el=document.createElement("button");el.className="day";el.type="button";el.setAttribute("aria-pressed",String(i===state.day));
+  const d=dateAt(i);el.innerHTML="<small></small><span></span>";
+  el.querySelector("small").textContent=d.toLocaleDateString("ru-RU",{weekday:"short"});
+  el.querySelector("span").textContent=d.toLocaleDateString("ru-RU",{day:"numeric",month:"short"});
+  el.onclick=()=>{state.day=i;state.time="";render()};
+  $("dates").append(el)
+ }
+}
+function showTimes(){
+ $("slots").replaceChildren();
+ const duration=services[state.service].duration;
+ for(let h=9;h<=19;h++){
+  const time=String(h).padStart(2,"0")+":00";
+  const unavailable=h+duration/60>20||booked(state.day,time);
+  const el=document.createElement("button");el.type="button";el.className="time";el.textContent=time;
+  el.disabled=unavailable;el.setAttribute("aria-pressed",String(state.time===time));
+  el.onclick=()=>{state.time=time;render()};
+  $("slots").append(el)
+ }
+}
+function summary(){
+ $("summary").replaceChildren();
+ const entries=[["Услуга",services[state.service].name],["Продолжительность",services[state.service].duration+" мин"],["Дата",fullDate(state.day)],["Время",state.time||"Не выбрано"],["Стоимость",formatRub(services[state.service].price)]];
+ entries.forEach(([a,b])=>{const div=document.createElement("div");div.className="pair";const label=document.createElement("span");label.textContent=a;const v=document.createElement("strong");v.textContent=b;div.append(label,v);$("summary").append(div)});
+ $("book").disabled=!state.time
+}
+function owner(){
+ $("count").textContent=state.bookings.length;
+ $("occupancy").textContent=state.bookings.length;
+ $("revenue").textContent=formatRub(state.bookings.reduce((a,x)=>a+x.price,0));
+ $("rows").replaceChildren();
+ $("empty").hidden=state.bookings.length>0;
+ state.bookings.forEach(b=>{
+  const tr=document.createElement("tr");
+  for(const t of [dateLabel(b.day),b.time,b.service,formatRub(b.price)]){const td=document.createElement("td");td.textContent=t;tr.append(td)}
+  const st=document.createElement("td"),span=document.createElement("span");span.className="status";span.textContent="Демо-запись";st.append(span);tr.append(st);
+  const td=document.createElement("td"),btn=document.createElement("button");btn.className="cancel";btn.type="button";btn.textContent="Отменить";btn.onclick=()=>{state.bookings=state.bookings.filter(x=>x.id!==b.id);render()};
+  td.append(btn);tr.append(td);$("rows").append(tr)
+ })
+}
+function render(){showServices();showDates();showTimes();summary();owner()}
+function view(name){
+ const isClient=name==="client";
+ $("clientView").style.display=isClient?"grid":"none";
+ $("ownerView").style.display=isClient?"none":"block";
+ $("clientTab").setAttribute("aria-selected",String(isClient));
+ $("ownerTab").setAttribute("aria-selected",String(!isClient));
+ if(!isClient)owner()
+}
+$("book").onclick=()=>{
+ if(!state.time||booked(state.day,state.time))return;
+ const s=services[state.service];
+ const b={id:state.next++,day:state.day,time:state.time,service:s.name,price:s.price};
+ state.bookings.push(b);
+ $("success").replaceChildren();
+ const note=document.createElement("div");note.className="success";
+ note.textContent="✓ Тестовая запись добавлена. "+s.name+" · "+dateLabel(b.day)+" · "+b.time+". Посмотрите кабинет владельца.";
+ $("success").append(note);
+ state.time="";render()
+};
+$("clientTab").onclick=()=>view("client");
+$("ownerTab").onclick=()=>view("owner");
+render();view("client");
+</script>
+</body></html>
