@@ -1,148 +1,310 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Telegram-боты и автоматизация бизнеса под конкретную задачу — KIR NEIR</title>
-<meta name="description" content="Починим существующего Telegram-бота, настроим приём заявок и уведомления, подключим CRM и таблицы. Понятная стоимость, живое демо, оценка без обязательств.">
+<meta name="theme-color" content="#f4f4f0">
+<meta name="description" content="КИР НЭЙР — разработка Telegram-ботов, сайтов и автоматизации. Исправим конкретный сбой или создадим рабочий инструмент. Живое демо, примеры кода, оценка задачи и связь с исполнителем.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Перестаньте терять заявки в Telegram">
-<meta property="og:description" content="Работающие боты, исправление ошибок и небольшая автоматизация. Демонстрация до заказа, цена после уточнения задачи.">
-<meta name="theme-color" content="#0a1018">
+<meta property="og:title" content="КИР НЭЙР — цифровые решения с понятным результатом">
+<meta property="og:description" content="Telegram-боты, веб-разработка и автоматизация. Сначала разбираем задачу, потом фиксируем работу и цену.">
+<title>КИР НЭЙР — разработка, которую можно проверить</title>
 <style>
-:root{color-scheme:dark;--bg:#0a1018;--panel:#101925;--panel2:#15212e;--line:#293747;--ink:#f0f6f7;--muted:#a6b6bf;--mint:#84f4c2;--gold:#f3c878}
+:root{
+ --paper:#f4f4f0;--white:#ffffff;--dark:#162426;--ink:#172324;--faded:#607072;
+ --line:#cbd3cd;--lime:#d7f972;--orange:#ef785a;--blue:#d9e7fb;--sage:#e3ebe0;
+ --shadow:0 17px 55px rgba(22,36,38,.09);scroll-behavior:smooth;
+}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+html{scroll-padding-top:84px}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
-header{position:sticky;top:0;background:rgba(10,16,24,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:3}
-nav{display:flex;align-items:center;gap:20px;min-height:68px}
-.brand{font-weight:850;letter-spacing:.03em}
-.brand span,.eyebrow{color:var(--mint)}
-nav .push{margin-left:auto}
-nav .smalllink{font-size:14px;color:var(--muted)}
-.hero{padding:94px 0 74px;background:radial-gradient(ellipse at 80% 15%,rgba(132,244,194,.1),transparent 52%),radial-gradient(ellipse at 10% 70%,rgba(59,130,246,.09),transparent 48%)}
-.eyebrow{font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.14em;margin:0 0 18px}
-h1{font-size:clamp(37px,6.4vw,72px);line-height:1.06;letter-spacing:-.05em;max-width:870px;margin:0 0 22px}
-.lead{max-width:690px;font-size:19px;color:var(--muted);margin:0 0 32px}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:12px 20px;border-radius:11px;border:1px solid var(--line);background:var(--panel2);font-weight:700}
-.btn:hover{filter:brightness(1.12)}
-.btn.primary{background:var(--mint);border-color:var(--mint);color:#071912}
-.evidence{margin:34px 0 0;display:flex;gap:10px;flex-wrap:wrap}
-.pill{display:inline-block;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:5px 12px;font-size:12px}
-main section{padding:64px 0}
-h2{font-size:clamp(28px,4vw,40px);line-height:1.14;letter-spacing:-.035em;margin:0 0 12px}
-.sub{color:var(--muted);margin:0 0 28px;max-width:760px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{display:flex;flex-direction:column;gap:12px;background:linear-gradient(155deg,#172332,#101923);border:1px solid var(--line);border-radius:18px;padding:25px;min-height:350px}
-.card.featured{border-color:rgba(132,244,194,.6);box-shadow:0 0 0 1px rgba(132,244,194,.12)}
-.kicker{color:var(--mint);text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:.12em}
-.card h3{font-size:22px;line-height:1.24;margin:0}
-.card p{color:var(--muted);margin:0}
-.price{font-size:34px;font-weight:850;letter-spacing:-.035em;margin-top:4px}
-.price small{font-size:13px;color:var(--muted);letter-spacing:0;font-weight:500}
-.card ul{margin:2px 0 10px;padding-left:18px;color:#c0ced6;font-size:14px;flex:1}
-.card li{margin:6px 0}
-.card a.btn{width:100%}
-.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.flow article{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:22px}
-.flow b{display:block;color:var(--gold);font-size:12px;margin-bottom:9px}
-.flow h3{margin:0 0 8px;font-size:18px}
-.flow p{color:var(--muted);margin:0;font-size:14px}
-.demo{border:1px solid rgba(132,244,194,.3);border-radius:22px;padding:32px;background:linear-gradient(105deg,rgba(132,244,194,.09),rgba(46,113,154,.08))}
-.demo p{color:var(--muted);max-width:790px}
-.split{display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center}
-ol.steps{padding-left:24px;color:#bdcdd6}
-ol.steps li{padding:6px 0}
-.faq details{border-bottom:1px solid var(--line);padding:17px 0}
-.faq summary{font-weight:700;cursor:pointer}
-.faq p{color:var(--muted);margin-bottom:0}
-.closing{border:1px solid var(--line);background:var(--panel);border-radius:25px;text-align:center;padding:48px 24px}
-.closing h2{margin-bottom:10px}
-.closing p{color:var(--muted);margin:0 0 23px}
-footer{color:#7f95a2;border-top:1px solid var(--line);padding:26px 0;font-size:13px}
-footer a{text-decoration:underline}
-@media(max-width:920px){.grid{grid-template-columns:1fr}.card{min-height:unset}.flow{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
-@media(max-width:600px){.hero{padding:60px 0 40px}.lead{font-size:16px}.actions .btn{width:100%}nav .smalllink{display:none}.demo{padding:21px}main section{padding:42px 0}}
+button{font:inherit}
+button,a{touch-action:manipulation}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ff8d5e;outline-offset:4px}
+.shell{width:min(1170px,calc(100% - 48px));margin:auto}
+.top{position:sticky;top:0;z-index:30;background:rgba(244,244,240,.95);backdrop-filter:blur(18px);border-bottom:1px solid #d9dfda}
+.nav{height:76px;display:flex;align-items:center;gap:32px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:-.07em;font-size:23px;white-space:nowrap}
+.symbol{display:grid;place-items:center;background:var(--dark);color:var(--lime);border-radius:11px;font-size:25px;letter-spacing:-.14em;width:42px;height:42px;padding-right:4px}
+.logo small{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--faded);display:block;line-height:1}
+.navlinks{display:flex;align-items:center;gap:28px;margin-left:auto;font-size:14px;font-weight:650}
+.navlinks a:hover,.plain-link:hover{color:#a9492e}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;border:1px solid var(--dark);padding:12px 20px;border-radius:100px;font-size:14px;font-weight:760;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(20,33,34,.14)}
+.btn-dark{background:var(--dark);color:white}
+.btn-lime{background:var(--lime);color:var(--dark)}
+.btn-ghost{background:transparent;color:var(--dark)}
+.btn-white{background:white;color:var(--dark);border-color:white}
+.nav-cta{margin-left:auto}
+.eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 23px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:850}
+.dot{display:inline-block;background:#7eae42;border-radius:100%;height:8px;width:8px}
+.hero{padding:89px 0 100px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:45px;align-items:center}
+.hero h1{font-size:clamp(49px,5.6vw,80px);line-height:1.04;letter-spacing:-.079em;font-weight:900;max-width:730px;margin:0}
+.hero h1 em{font-style:normal;color:#5b7a49}
+.hero .lead{font-size:19px;max-width:580px;color:#526164;margin:26px 0 27px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:10px}
+.subnote{font-size:12px;color:#637275;margin:20px 0 0;max-width:500px}
+.hero-art{position:relative;min-height:445px;display:grid;align-items:center}
+.hero-art:before{content:"";position:absolute;width:380px;height:380px;background:var(--lime);border-radius:46% 54% 58% 42%;right:-40px;top:20px;filter:blur(.5px);transform:rotate(16deg)}
+.window{position:relative;max-width:475px;background:#fff;border:1px solid #bdc9c3;border-radius:20px;overflow:hidden;box-shadow:0 28px 70px rgba(28,40,31,.18);transform:rotate(2deg);margin:auto}
+.windowbar{display:flex;align-items:center;padding:17px 19px;gap:6px;background:#f1f4f2;border-bottom:1px solid #e1e6e1}
+.windowbar i{height:8px;width:8px;border-radius:50%;background:#b7c7bd}
+.windowbar .address{margin:auto;font-size:11px;font-weight:850;letter-spacing:.035em;color:#657672}
+.inbox-preview{padding:24px 25px 27px}
+.preview-label{font-size:10px;letter-spacing:.17em;font-weight:800;color:#647771;text-transform:uppercase}
+.preview-title{font-size:22px;font-weight:880;letter-spacing:-.035em;margin:6px 0 16px}
+.fake-message{border:1px solid #e1e7e3;border-radius:15px;padding:16px;background:#fcfdfb}
+.fake-message-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:12px}
+.fake-message-head strong{font-size:13px}
+.green-status{background:#dff5d5;color:#35662d;border-radius:50px;font-size:10px;font-weight:850;padding:3px 9px}
+.fake-line{height:9px;border-radius:20px;background:#e4ebe5;margin:9px 0}
+.fake-line.short{width:56%}.fake-line.med{width:76%}
+.status-row{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 13px;background:#f4f9ee;border-radius:10px;color:#456f39;font-size:12px;font-weight:750}
+.spark{background:var(--lime);border:2px solid var(--dark);box-shadow:5px 6px 0 var(--dark);border-radius:13px;padding:13px 16px;position:absolute;right:-5px;bottom:8px;z-index:3;font-size:12px;font-weight:900;transform:rotate(-7deg)}
+.mini-caption{position:absolute;bottom:-35px;left:50%;transform:translateX(-50%);font-size:11px;color:#7b8984;white-space:nowrap}
+.marquee{background:var(--dark);color:#f0f7ed;padding:18px 0}
+.marquee-inner{display:flex;justify-content:space-between;gap:25px;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.marquee b{color:var(--lime)}
+.sec{padding:105px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:45px;margin-bottom:33px}
+.sec-head h2,h2.block-title{font-size:clamp(34px,4.2vw,59px);line-height:1.06;letter-spacing:-.065em;font-weight:900;max-width:720px;margin:0}
+.sec-head p{max-width:370px;color:var(--faded);margin:0}
+.overline{font-size:12px;color:#5b7950;text-transform:uppercase;letter-spacing:.15em;font-weight:850;margin:0 0 14px}
+.services{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.service{position:relative;min-height:345px;display:flex;flex-direction:column;padding:30px;border:1px solid #d2dad2;border-radius:23px;background:white;overflow:hidden}
+.service.feature{background:var(--dark);color:white;border-color:var(--dark)}
+.service .num{font-size:12px;letter-spacing:.09em;font-weight:800;color:#81928a}
+.service.feature .num{color:#a6b8af}
+.service h3{margin:23px 0 12px;font-size:clamp(27px,2.7vw,40px);line-height:1.11;letter-spacing:-.055em;max-width:350px}
+.service p{margin:0;color:#637173;max-width:400px}
+.service.feature p{color:#afbfba}
+.service .bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:25px}
+.service .price{font-size:18px;font-weight:900;letter-spacing:-.02em}
+.service .price small{display:block;font-size:11px;color:#82918c;font-weight:550;letter-spacing:0}
+.service.feature .price small{color:#b4c2b8}
+.arrow-circle{height:48px;width:48px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;font-size:25px}
+.service.feature .arrow-circle{background:var(--lime);color:var(--dark);border-color:var(--lime)}
+.service .details{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.service .details span{border:1px solid #dce3dc;border-radius:50px;padding:3px 9px;color:#76827d;font-size:11px}
+.service.feature .details span{border-color:#4b6056;color:#c7d2cc}
+.service:hover .arrow-circle{transform:translate(3px,-3px)}
+.service.wide{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;min-height:240px;align-items:center;background:var(--blue)}
+.service.wide h3{margin:12px 0;max-width:510px}
+.service.wide .bottom{justify-content:end}
+.proof-section{background:#e9eee8;border-top:1px solid #dce4da;border-bottom:1px solid #dce4da}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.proof-code{border-radius:18px;overflow:hidden;background:#172324;color:#d2e3d8;box-shadow:var(--shadow)}
+.code-top{padding:15px 20px;border-bottom:1px solid #3c4b45;color:#93b49c;font:12px/1.2 ui-monospace,Consolas,monospace}
+.code-body{font:14px/1.85 ui-monospace,Consolas,monospace;padding:23px 28px;white-space:pre-wrap;word-break:break-word}
+.code-body .lime{color:#d7f972}.code-body .orange{color:#efa18a}
+.proof-copy h2{font-size:clamp(34px,4.2vw,57px);letter-spacing:-.06em;line-height:1.06;margin:0 0 20px}
+.proof-copy p{color:#5b6b66;font-size:16px}
+.proof-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.section-note{font-size:13px;color:#778680;margin-top:19px}
+.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.approach article{border-top:2px solid var(--dark);padding:20px 0}
+.approach .step{font-size:12px;font-weight:850;color:#a75a42}
+.approach h3{font-size:22px;letter-spacing:-.035em;margin:16px 0 8px}
+.approach p{color:#687773;font-size:14px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:start}
+.about .plate{background:var(--lime);border-radius:23px;padding:38px;position:relative;min-height:300px}
+.plate .monogram{font-size:clamp(105px,11vw,160px);font-weight:950;letter-spacing:-.13em;line-height:1}
+.plate .tag{font-size:12px;font-weight:850;border-top:1px solid #718752;padding-top:17px;margin-top:34px}
+.about h2{font-size:clamp(35px,4vw,57px);letter-spacing:-.065em;line-height:1.06;margin:0}
+.about p{color:#566863}
+.about ul{list-style:none;padding:0;margin:20px 0 0}
+.about li{border-bottom:1px solid #d5ddd4;padding:12px 0;font-size:14px}
+.about li:before{content:"↗";color:#4a7754;margin-right:12px;font-weight:bold}
+.faq details{padding:22px 0;border-top:1px solid #d2dcd2}
+.faq details:last-child{border-bottom:1px solid #d2dcd2}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:15px;justify-content:space-between;font-weight:760;font-size:18px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-size:22px;font-weight:400}
+.faq details[open] summary:after{content:"–"}
+.faq p{max-width:750px;color:#596c64;margin-bottom:0}
+.close{background:var(--dark);color:white;padding:87px 0}
+.close-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.close h2{font-size:clamp(43px,5.5vw,78px);letter-spacing:-.075em;line-height:1.04;margin:0}
+.close p{color:#b6c5bd}
+.close .actions{display:flex;flex-direction:column;gap:11px;max-width:340px}
+.close .actions .btn{width:100%}
+.footer{background:#111d1e;color:#a1b4aa;padding:30px 0}
+.footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;font-size:12px}
+.footer a{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:970px){
+ .hero-grid,.proof-grid,.about{grid-template-columns:1fr}
+ .hero-art{min-height:360px;max-width:520px;margin:40px auto 0}
+ .hero{padding-bottom:65px}
+ .sec{padding:75px 0}
+ .sec-head{display:block}.sec-head p{margin-top:20px}
+ .navlinks{display:none}
+}
+@media(max-width:640px){
+ .shell{width:calc(100% - 32px)}
+ .nav{height:68px;gap:12px}
+ .logo{font-size:20px}.logo small{font-size:8px}
+ .nav-cta{font-size:12px;min-height:42px;padding:8px 11px}
+ .hero{padding:55px 0 42px}
+ .hero h1{font-size:clamp(44px,11.8vw,66px)}
+ .hero .lead{font-size:16px}
+ .hero .actions .btn{width:100%}
+ .hero-art{min-height:345px;margin:20px 0}
+ .window{transform:rotate(1deg)}
+ .spark{right:0;bottom:6px;font-size:11px}
+ .marquee-inner{justify-content:flex-start;gap:12px}
+ .services,.approach,.close-grid{grid-template-columns:1fr}
+ .service.wide{grid-column:auto;display:flex}
+ .service{min-height:315px;padding:23px}
+ .sec{padding:59px 0}
+ .about .plate{min-height:245px}
+ .code-body{font-size:12px;padding:19px}
+ .close{padding:60px 0}
+ .close .actions{max-width:none}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
-<header><nav class="wrap">
-  <a class="brand" href="/">KIR <span>NEIR</span> / BUSINESS</a>
-  <span class="push"></span><a class="smalllink" href="#price">Услуги и цены</a><a class="smalllink" href="#demo">Демо</a>
-  <a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_main" target="_blank" rel="noopener">Обсудить задачу ↗</a>
-</nav></header>
+<header class="top">
+  <nav class="shell nav" aria-label="Основное меню">
+    <a class="logo" href="/" aria-label="Кир Нэйр — главное портфолио"><span class="symbol">K<span style="font-size:17px">/</span></span><span>КИР НЭЙР<small>РАЗРАБОТКА И АВТОМАТИЗАЦИЯ</small></span></a>
+    <div class="navlinks"><a href="#services">Решения</a><a href="#proof">Реальная работа</a><a href="#about">Кто отвечает</a></div>
+    <a class="btn btn-dark nav-cta" href="https://t.me/ai_ivan_7042_bot?start=site_human" target="_blank" rel="noopener noreferrer">Обсудить с разработчиком ↗</a>
+  </nav>
+</header>
 <main>
-<div class="hero"><div class="wrap">
-  <p class="eyebrow">Боты · сайты · автоматизация · небольшие задачи</p>
-  <h1>Клиент написал.<br>Заявка дошла.<br><span style="color:var(--mint)">Никто не забыл ответить.</span></h1>
-  <p class="lead">Если заявки теряются в переписках, бот сломался или сотрудники вручную переписывают данные — исправим конкретный процесс. Без сложного внедрения ради внедрения.</p>
-  <div class="actions"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_audit" target="_blank" rel="noopener">Оценить мою задачу бесплатно ↗</a><a class="btn" href="https://t.me/ai_ivan_7042_bot?start=formdemo" target="_blank" rel="noopener">Открыть работающее демо</a></div>
-  <div class="evidence"><span class="pill">Публичные примеры кода</span><span class="pill">Сначала согласуем объём</span><span class="pill">Без навязанных подписок</span></div>
+<section class="hero">
+  <div class="shell hero-grid">
+    <div>
+      <p class="eyebrow"><i class="dot" aria-hidden="true"></i> Небольшие проекты. Измеримый результат.</p>
+      <h1>Хватит<br>терять время<br>на <em>ручную работу.</em></h1>
+      <p class="lead">Чиню сломанных Telegram-ботов, собираю заявки в один поток и связываю сервисы. Вы получаете работающий инструмент — с кодом, проверкой и понятными условиями.</p>
+      <div class="actions">
+        <a class="btn btn-dark" href="https://t.me/ai_ivan_7042_bot?start=site_human" target="_blank" rel="noopener noreferrer">Обсудить задачу с человеком <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="#proof">Посмотреть реальную работу ↓</a>
+      </div>
+      <p class="subnote">Первичное обсуждение бесплатно. Вас встретит Иван — автоматизированный помощник. Смету и условия подтверждает разработчик КИР НЭЙР.</p>
+    </div>
+    <div class="hero-art" aria-label="Иллюстрация работы системы приёма заявок">
+      <div class="window">
+        <div class="windowbar"><i></i><i></i><i></i><span class="address">KIR NEIR / FLOW / DEMO</span></div>
+        <div class="inbox-preview">
+          <div class="preview-label">ОБРАБОТКА ЗАЯВОК</div>
+          <div class="preview-title">Всё важное — на месте.</div>
+          <div class="fake-message">
+            <div class="fake-message-head"><strong>Заявка из Telegram</strong><span class="green-status">● Получено</span></div>
+            <div class="fake-line"></div><div class="fake-line med"></div><div class="fake-line short"></div>
+          </div>
+          <div class="status-row">✓ Данные сохранены · владелец уведомлён</div>
+        </div>
+      </div>
+      <div class="spark">НЕ МАКЕТ ВМЕСТО ПРОДУКТА. <br>НИЖЕ — РЕАЛЬНОЕ ДЕМО ↘</div>
+      <div class="mini-caption">Иллюстрация интерфейса, не заявка клиента</div>
+    </div>
+  </div>
+</section>
+<div class="marquee"><div class="shell marquee-inner">
+  <span><b>01</b> Починить то, что не работает</span>
+  <span><b>02</b> Убрать ручные действия</span>
+  <span><b>03</b> Проверить результат</span>
 </div></div>
-<section id="price"><div class="wrap">
-  <h2>Три понятные задачи — три способа начать</h2>
-  <p class="sub">Цены — стартовые ориентиры для небольшого объёма работ, а не обещание сделать неограниченное ТЗ за фиксированную сумму. Точная стоимость после уточнения требований.</p>
-  <div class="demo" style="margin:0 0 25px;background:linear-gradient(110deg,rgba(243,200,120,.08),rgba(132,244,194,.05))">
-    <p class="eyebrow">Начните с малого — без покупки большого проекта</p>
-    <h3 style="font-size:clamp(24px,3.2vw,34px);margin:4px 0 10px">Одна простая ошибка — от 2 900 ₽</h3>
-    <p>Для воспроизводимой небольшой правки существующего Telegram-бота. Подходит, если ошибка понятна и её исправление после диагностики оценивается максимум в 2 рабочих часа. Сначала бесплатно проверим описание и оценим объём; при более сложном сбое заранее предложим отдельную смету. Пароли и токены в чате не нужны.</p>
-    <div class="actions"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_microfix" target="_blank" rel="noopener">Проверить, подойдёт ли моя ошибка ↗</a></div>
+
+<section class="sec" id="services"><div class="shell">
+  <p class="overline">НАЧИНАЕМ С КОНКРЕТНОЙ ПРОБЛЕМЫ</p>
+  <div class="sec-head"><h2>Не продаю «ИИ ради ИИ».<br>Решаю задачи.</h2><p>Можете начать с одного небольшого исправления. Если задача сложнее — сначала зафиксируем состав работ, а не будем обещать невозможное.</p></div>
+  <div class="services">
+    <a class="service feature" href="https://t.me/ai_ivan_7042_bot?start=site_microfix" target="_blank" rel="noopener noreferrer">
+      <span class="num">01 / БЫСТРЫЙ ВХОД</span><h3>Ваш бот<br>сломался?</h3>
+      <p>Исправление одной воспроизводимой ошибки до двух часов после диагностики. Если объём больше — сообщу до начала работы.</p>
+      <div class="details"><span>Работа с исходниками</span><span>Тестовый сценарий</span><span>Чёткие границы</span></div>
+      <div class="bottom"><span class="price">от 2 900 ₽ <small>за согласованную микроисправление</small></span><span class="arrow-circle" aria-hidden="true">↗</span></div>
+    </a>
+    <a class="service" href="https://t.me/ai_ivan_7042_bot?start=site_leads" target="_blank" rel="noopener noreferrer">
+      <span class="num">02 / ГОТОВЫЙ СЦЕНАРИЙ</span><h3>Заявки проходят мимо?</h3>
+      <p>Бот задаёт вопросы, сохраняет ответы и передаёт сведения владельцу. Есть действующее демо и исходный код.</p>
+      <div class="details"><span>До 10 вопросов</span><span>CSV</span><span>Уведомления</span></div>
+      <div class="bottom"><span class="price">от 9 900 ₽ <small>за базовый сценарий</small></span><span class="arrow-circle" aria-hidden="true">↗</span></div>
+    </a>
+    <a class="service wide" href="https://t.me/ai_ivan_7042_bot?start=site_integrations" target="_blank" rel="noopener noreferrer">
+      <div><span class="num">03 / ПОД ЗАДАЧУ</span><h3>CRM, API, AI-ассистенты, сайты и приложения</h3><p>Когда готового решения недостаточно — анализирую процесс, предлагаю архитектуру и оцениваю конкретный объём.</p></div>
+      <div class="bottom"><span class="price">по смете <small>после технического разбора</small></span><span class="arrow-circle" aria-hidden="true">↗</span></div>
+    </a>
   </div>
-  <div class="grid">
-    <article class="card">
-      <span class="kicker">01 / срочная помощь</span><h3>Бот перестал работать?</h3>
-      <p>Диагностика и исправление одной воспроизводимой ошибки в доступном исходном коде.</p>
-      <div class="price">от 4 900 ₽ <small>за согласованную задачу</small></div>
-      <ul><li>Разберём воспроизводимый сбой</li><li>Опишем причину и план исправления</li><li>Проверим результат на тестовой среде</li></ul>
-      <a class="btn" href="https://t.me/ai_ivan_7042_bot?start=site_repair" target="_blank" rel="noopener">Узнать стоимость починки ↗</a>
-    </article>
-    <article class="card featured">
-      <span class="kicker">02 / быстрый запуск</span><h3>Бот для приёма заявок</h3>
-      <p>Клиент отвечает на вопросы, вы получаете структурированную заявку вместо длинной переписки.</p>
-      <div class="price">от 9 900 ₽ <small>за базовый сценарий</small></div>
-      <ul><li>До 10 вопросов и проверка ответов</li><li>Хранение заявок и выгрузка CSV</li><li>Уведомление владельца</li><li>Инструкция по запуску</li></ul>
-      <a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_leads" target="_blank" rel="noopener">Хочу такого бота ↗</a>
-    </article>
-    <article class="card">
-      <span class="kicker">03 / автоматизация</span><h3>Связать чаты, таблицы и CRM</h3>
-      <p>Убрать ручное копирование данных, отчёты «на коленке» и путаницу со статусами.</p>
-      <div class="price">от 19 900 ₽ <small>после оценки интеграций</small></div>
-      <ul><li>Один согласованный процесс</li><li>API, таблица или CRM</li><li>Логи ошибок и инструкция</li><li>Проверка на тестовых данных</li></ul>
-      <a class="btn" href="https://t.me/ai_ivan_7042_bot?start=site_integrations" target="_blank" rel="noopener">Разобрать процесс ↗</a>
-    </article>
+  <p class="section-note">Стоимость стартовая, не оферта. Для неработающего чужого проекта нужно проверить исходники, окружение и воспроизведение ошибки. Хостинг и подписки согласуются отдельно.</p>
+</div></section>
+
+<section class="sec proof-section" id="proof"><div class="shell proof-grid">
+  <div class="proof-copy">
+    <p class="overline">ПОСМОТРЕТЬ, А НЕ ПОВЕРИТЬ НА СЛОВО</p>
+    <h2>Вот что уже работает.</h2>
+    <p>Настоящий демонстрационный бот собирает ответы по шагам, проверяет поля, хранит данные и позволяет выгрузить CSV. Это собственный учебно-коммерческий прототип, а не выдуманный клиентский кейс.</p>
+    <div class="proof-links">
+      <a class="btn btn-dark" href="https://t.me/ai_ivan_7042_bot?start=formdemo" target="_blank" rel="noopener noreferrer">Пройти живое демо ↗</a>
+      <a class="btn btn-ghost" href="https://github.com/requiemneon-ship-it/telegram-lead-bot" target="_blank" rel="noopener noreferrer">Проверить исходники ↗</a>
+    </div>
+    <p class="section-note">Нет нарисованных отзывов, несуществующих логотипов заказчиков или неподтверждённой статистики продаж.</p>
   </div>
-  <p class="sub" style="margin:18px 0 0">Нужны AI-ассистент, сайт, Mini App или веб-приложение? Берёмся после отдельного технического разбора и оценки. Не выдаём сложную разработку за «бота за вечер».</p>
-</div></section>
-<section id="demo"><div class="wrap">
-  <div class="demo split">
-    <div><p class="eyebrow">Не презентация — действующий сценарий</p><h2>Пройдите путь собственного клиента</h2>
-    <p>Откройте демонстрационного AI Ивана и проверьте анкету: десять шагов, сохранение ответов и экспорт. Это пример механики — не чужой коммерческий кейс и не обещание роста продаж.</p>
-    <div class="actions"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=formdemo" target="_blank" rel="noopener">Попробовать демо ↗</a><a class="btn" href="https://github.com/requiemneon-ship-it/telegram-lead-bot" target="_blank" rel="noopener">Посмотреть код ↗</a></div></div>
-    <div><ol class="steps"><li>Покупатель сам открывает бота</li><li>Бот задаёт уточняющие вопросы</li><li>Ответы попадают в базу</li><li>Владелец получает структурированную заявку</li></ol></div>
-  </div>
-</div></section>
-<section><div class="wrap">
-  <h2>Как проходит заказ</h2><p class="sub">Начинаем с конкретной проблемы. Работу и цену согласуем до старта.</p>
-  <div class="flow">
-    <article><b>ШАГ 01</b><h3>Коротко описываете задачу</h3><p>Что сломано или что занимает лишнее время? Какие системы уже используете?</p></article>
-    <article><b>ШАГ 02</b><h3>Получаете предложение</h3><p>Объём работ, условия проверки, цена, сроки и что от вас потребуется. Если задача не подходит, скажем прямо.</p></article>
-    <article><b>ШАГ 03</b><h3>Проверяете готовый результат</h3><p>Работающий сценарий, исходники по договорённости и инструкция. Хостинг и сторонние подписки обсуждаются отдельно.</p></article>
-  </div>
-</div></section>
-<section class="faq"><div class="wrap">
-  <h2>Что важно до заказа</h2>
-  <details><summary>Нужно ли покупать сервер заранее?</summary><p>Нет. Для оценки и демонстрации расходов не требуется. Для круглосуточной работы реального клиентского бота нужен хостинг или компьютер, который постоянно включён; бюджет согласуем отдельно.</p></details>
-  <details><summary>Вы обещаете увеличение продаж?</summary><p>Нет, без данных такого обещать нельзя. Мы отвечаем за согласованную техническую функцию — например, чтобы пришедшие в бот заявки сохранялись и передавались владельцу.</p></details>
-  <details><summary>Можно показать только одну ошибку или маленькую задачу?</summary><p>Да, это лучший старт: одну конкретную проблему проще оценить, проверить и закрыть с понятным результатом.</p></details>
-  <details><summary>Что нужно для оценки?</summary><p>Описание проблемы, пример желаемого результата и используемые сервисы. Не присылайте пароли, API-токены и доступы на этапе оценки.</p></details>
-</div></section>
-<section><div class="wrap">
-  <div class="closing"><p class="eyebrow">Первый шаг — без оплаты</p><h2>Опишите задачу в двух предложениях</h2><p>Ответим, входит ли она в быстрый пакет, что потребуется и как оценить стоимость.</p>
-    <div class="actions" style="justify-content:center"><a class="btn primary" href="https://t.me/ai_ivan_7042_bot?start=site_final" target="_blank" rel="noopener">Перейти к AI Ивану ↗</a></div>
+  <div class="proof-code" aria-label="Пример сценария обработки заявок">
+    <div class="code-top">LEAD BOT / ПРАВИЛА ОБРАБОТКИ · ИЛЛЮСТРАЦИЯ ПРОЦЕССА</div>
+    <div class="code-body"><span class="lime">01 ·</span> Клиент открыл Telegram
+       ↓
+<span class="lime">02 ·</span> Ответил на вопросы
+       ↓
+<span class="lime">03 ·</span> Данные проверены
+       ↓
+<span class="lime">04 ·</span> Заявка записана в SQLite
+       ↓
+<span class="lime">05 ·</span> Владелец получил уведомление
+
+<span class="orange">✓</span> Результат можно проверить
+<span class="orange">↗</span> Публичный пример кода рядом</div>
   </div>
 </div></section>
-</main><footer><div class="wrap">KIR NEIR · Разработка небольших IT-решений · <a href="/">Портфолио</a> · <a href="https://github.com/requiemneon-ship-it" target="_blank" rel="noopener">Примеры кода</a> · <a href="https://t.me/ai_ivan_7042_bot" target="_blank" rel="noopener">Telegram</a><br>Цены ориентировочные. Договорённости, сроки и состав работы фиксируются после обсуждения.</div></footer>
-</body></html>
+
+<section class="sec"><div class="shell">
+  <p class="overline">НЕ ОПЛАТА «ЗА КРАСИВЫЕ СЛОВА»</p>
+  <div class="sec-head"><h2>Сначала смысл.<br>Потом код.</h2><p>Три шага, которые уменьшают риск получить совсем не то, что вам нужно.</p></div>
+  <div class="approach">
+    <article><span class="step">01 — ПОНИМАЕМ</span><h3>Разбираем проблему</h3><p>Что сейчас не работает, какой результат ожидаете, какие сервисы уже используются. Без передачи паролей при первичном обсуждении.</p></article>
+    <article><span class="step">02 — ДОГОВАРИВАЕМСЯ</span><h3>Фиксируем границы</h3><p>Проверяемый результат, стоимость, сроки, что входит и что не входит. Согласование до работы и оплаты.</p></article>
+    <article><span class="step">03 — ПРОВЕРЯЕМ</span><h3>Показываем результат</h3><p>Тестовый сценарий, исправление или рабочий прототип, инструкция и сдача по согласованным критериям.</p></article>
+  </div>
+</div></section>
+
+<section class="sec" id="about"><div class="shell about">
+  <div class="plate"><div class="monogram">К/Н</div><div class="tag">КИР НЭЙР / НЕЗАВИСИМЫЙ РАЗРАБОТЧИК · ПУБЛИЧНОЕ ПОРТФОЛИО НА GITHUB</div></div>
+  <div><p class="overline">КТО ЗА ЭТИМ СТОИТ</p><h2>Не безликая «AI-студия».</h2>
+    <p><strong>КИР НЭЙР</strong> — публичное имя исполнителя, под которым ведётся разработка и портфолио. Сайт, примеры кода и условия относятся к одной практике.</p>
+    <p><strong>Иван</strong> — автоматизированный помощник в Telegram. Он собирает требования и помогает подготовить заявку. Окончательные условия и технические решения подтверждает разработчик, а не бот.</p>
+    <ul>
+      <li>Можно запросить прямой ответ исполнителя.</li>
+      <li>Есть ссылки на открытые примеры кода.</li>
+      <li>Нет обязательной оплаты до оценки задания.</li>
+    </ul>
+    <div style="margin-top:24px"><a class="btn btn-dark" href="https://t.me/ai_ivan_7042_bot?start=site_human" target="_blank" rel="noopener noreferrer">Попросить ответ разработчика ↗</a></div>
+  </div>
+</div></section>
+
+<section class="sec faq"><div class="shell">
+  <p class="overline">ЗАКРЫВАЕМ ВОПРОСЫ ДО НАЧАЛА</p>
+  <h2 class="block-title" style="margin-bottom:30px">Честные условия.</h2>
+  <details><summary>Почему первая цена от 2 900 ₽?</summary><p>Это ограниченное предложение для одной небольшой воспроизводимой ошибки при оценке работы до двух часов. Сложная диагностика и новые функции не входят в этот объём; до начала согласуем другую смету.</p></details>
+  <details><summary>Я общаюсь с человеком или с ботом?</summary><p>Первое сообщение принимает автоматизированный помощник Иван, чтобы описание задачи не потерялось. Вы можете запросить ответ непосредственно разработчика. Ответ не гарантирован мгновенно и зависит от доступности исполнителя.</p></details>
+  <details><summary>А если мне нужен полноценный AI-ассистент или приложение?</summary><p>Такие проекты возможны, но их нельзя честно оценить без задачи, интеграций, данных и ограничений. Предложим этапы, объём, стоимость и критерии проверки после уточнения требований.</p></details>
+  <details><summary>Вы уже работали с другими платными заказчиками?</summary><p>На странице представлены собственные демонстрационные проекты и открытый исходный код. Мы не приписываем себе неподтверждённые коммерческие кейсы, отзывы или результаты чужих бизнесов.</p></details>
+</div></section>
+
+<section class="close" id="contact"><div class="shell close-grid">
+  <div><p class="eyebrow" style="color:var(--lime)">ГОТОВЫ РАЗОБРАТЬ ВАШУ ЗАДАЧУ?</p><h2>Покажите,<br>где болит.</h2><p>Достаточно двух предложений: что сейчас не работает и что должно происходить. Не нужно придумывать техническое задание вместо нас.</p></div>
+  <div class="actions">
+    <a class="btn btn-lime" href="https://t.me/ai_ivan_7042_bot?start=site_human" target="_blank" rel="noopener noreferrer">Запросить ответ разработчика ↗</a>
+    <a class="btn btn-white" href="https://t.me/ai_ivan_7042_bot?start=site_microfix" target="_blank" rel="noopener noreferrer">Нужна небольшая починка ↗</a>
+    <p style="font-size:12px">Вас встретит автоматизированный помощник. Личный Telegram-разговор с исполнителем не имитируется.</p>
+  </div>
+</div></section>
+</main>
+<footer class="footer"><div class="shell footer-row"><span>© 2026 КИР НЭЙР · Независимая разработка</span><span><a href="/">Все проекты</a> · <a href="https://github.com/requiemneon-ship-it" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://t.me/ai_ivan_7042_bot" target="_blank" rel="noopener noreferrer">Telegram-приёмная</a></span><span>Без выдуманных гарантий и скрытых подписок</span></div></footer>
+</body>
+</html>
